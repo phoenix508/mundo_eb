@@ -60,11 +60,67 @@ const transporter = nodemailer.createTransport({
     }
 });
 
+// Gallery data
+const galleryImages = [
+    {
+        url: 'https://cdn.pixabay.com/photo/2017/10/29/10/55/big-ben-2899429_960_720.jpg',
+        title: 'Big Ben',
+        location: 'London, UK'
+    },
+    {
+        url: 'https://cdn.pixabay.com/photo/2019/08/08/06/06/fushimi-inari-4392018_960_720.jpg',
+        title: 'Fushimi Inari Shrine',
+        location: 'Kyoto, Japan'
+    },
+    {
+        url: 'https://cdn.pixabay.com/photo/2016/07/28/02/02/santorini-1546901_960_720.jpg',
+        title: 'Blue Domes',
+        location: 'Santorini, Greece'
+    },
+    {
+        url: 'https://cdn.pixabay.com/photo/2021/10/23/16/31/italy-6735340_960_720.jpg',
+        title: 'Grand Canal',
+        location: 'Venice, Italy'
+    },
+    {
+        url: 'https://cdn.pixabay.com/photo/2017/11/21/05/57/terracotta-warriors-2967435_960_720.jpg',
+        title: 'Terracotta Army',
+        location: 'XiAn, China'
+    },
+    {
+        url: 'https://cdn.pixabay.com/photo/2023/04/16/11/27/bridge-7930004_960_720.jpg',
+        title: 'Dumbo Bridge',
+        location: 'Brooklyn, USA'
+    },
+    {
+        url: 'https://cdn.pixabay.com/photo/2016/01/13/17/48/machupicchu-1138641_960_720.jpg',
+        title: 'Machu Picchu',
+        location: 'Cusco, Peru'
+    },
+    {
+        url: 'https://cdn.pixabay.com/photo/2022/11/01/14/02/the-bund-7562414_960_720.jpg',
+        title: 'The Bund',
+        location: 'Shanghai, China'
+    },
+    {
+        url: 'https://images.unsplash.com/photo-1523059623039-a9ed027e7fad',
+        title: 'Sydney Opera House',
+        location: 'Sydney, Australia'
+    }
+];
+
 // Routes
 app.get('/', (req, res) => {
     res.render('index', {
-        title: 'Travel Explorer',
-        message: 'Discover amazing destinations'
+        title: 'Home',
+        message: 'Welcome to Travel Explorer'
+    });
+});
+
+app.get('/gallery', (req, res) => {
+    res.render('gallery', {
+        title: 'Gallery',
+        galleryImages: galleryImages
     });
 });
 

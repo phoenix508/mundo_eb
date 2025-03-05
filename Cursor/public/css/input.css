@@ -53,4 +53,16 @@
 .modal-exit-active {
     @apply opacity-0 scale-95;
     transition: opacity 300ms ease-in, transform 300ms ease-in;
+}
+
+.gallery-item {
+    @apply relative overflow-hidden rounded-2xl transition-transform duration-300 hover:scale-105;
+}
+
+.gallery-overlay {
+    @apply absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 transition-opacity duration-300;
+}
+
+.gallery-item:hover .gallery-overlay {
+    @apply opacity-100;
 } 

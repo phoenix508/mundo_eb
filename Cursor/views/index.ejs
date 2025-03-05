@@ -1,0 +1,352 @@
+<!-- Hero Section -->
+<section id="home" class="h-screen flex items-center justify-center relative overflow-hidden">
+    <div class="absolute inset-0 bg-black/50 z-10"></div>
+    <div class="container mx-auto px-6 relative z-20 text-center">
+        <h1 class="text-5xl md:text-7xl font-bold mb-6 text-white">Explore The World</h1>
+        <p class="text-xl md:text-2xl mb-8 text-gray-200">Discover amazing destinations and create unforgettable memories</p>
+        <div class="flex justify-center gap-4">
+            <a href="#destinations" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full text-lg font-semibold transition-colors">
+                Start Exploring
+            </a>
+            <a href="https://shorturl.at/6BqcK" target="_blank" 
+               class="bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded-full text-lg font-semibold transition-colors flex items-center gap-2">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/>
+                    <path fill="white" d="M9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+                Subscribe
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Destinations -->
+<section class="py-20">
+    <div class="container mx-auto px-6">
+        <h2 class="text-4xl font-bold text-center mb-12 text-white">Explore The World With Us</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Destination Cards with Hover Effect -->
+            <div class="card-zoom cursor-pointer" onclick="showTravelTips('beijing')">
+                <div class="card-zoom-image bg-beijing"></div>
+                <h3 class="card-zoom-text">Beijing</h3>
+            </div>
+            <div class="card-zoom cursor-pointer" onclick="showTravelTips('paris')">
+                <div class="card-zoom-image bg-paris"></div>
+                <h3 class="card-zoom-text">Paris</h3>
+            </div>
+            <div class="card-zoom cursor-pointer" onclick="showTravelTips('tokyo')">
+                <div class="card-zoom-image bg-tokyo"></div>
+                <h3 class="card-zoom-text">Tokyo</h3>
+            </div>
+            <div class="card-zoom cursor-pointer" onclick="showTravelTips('newyork')">
+                <div class="card-zoom-image bg-newyork"></div>
+                <h3 class="card-zoom-text">New York</h3>
+            </div>
+            <div class="card-zoom cursor-pointer" onclick="showTravelTips('venice')">
+                <div class="card-zoom-image bg-venice"></div>
+                <h3 class="card-zoom-text">Venice</h3>
+            </div>
+            <div class="card-zoom cursor-pointer" onclick="showTravelTips('mexicocity')">
+                <div class="card-zoom-image bg-mexicocity"></div>
+                <h3 class="card-zoom-text">Mexico City</h3>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Search Section -->
+<section id="destinations" class="py-20">
+    <div class="container mx-auto px-6">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-12 text-white">Find Your Perfect Destination</h2>
+            <div class="bg-white/10 backdrop-blur-md rounded-lg p-6">
+                <div class="flex gap-4">
+                    <input 
+                        type="text" 
+                        id="searchInput"
+                        class="flex-1 px-4 py-3 rounded-lg bg-gradient-to-br from-grey/10 to-grey/20 backdrop-blur-md border border-white/30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        placeholder="Search destinations..."
+                    >
+                    <button 
+                        onclick="searchDestinations()"
+                        class="bg-blue-600 hover:bg-blue-700 px-8 py-3 rounded-lg font-semibold transition-colors"
+                    >
+                        Search
+                    </button>
+                </div>
+                <div id="searchResults" class="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="py-20 bg-black/30 backdrop-blur-md">
+    <div class="container mx-auto px-6">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-12">Get in Touch</h2>
+            <form id="contactForm" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Name</label>
+                        <input 
+                            type="text" 
+                            name="name" 
+                            class="w-full px-4 py-3 rounded-lg bg-white/20 backdrop-blur-md border border-white/30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required
+                        >
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Email</label>
+                        <input 
+                            type="email" 
+                            name="email" 
+                            class="w-full px-4 py-3 rounded-lg bg-white/20 backdrop-blur-md border border-white/30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required
+                        >
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-2">Message</label>
+                    <textarea 
+                        name="message" 
+                        rows="5" 
+                        class="w-full px-4 py-3 rounded-lg bg-white/20 backdrop-blur-md border border-white/30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        required
+                    ></textarea>
+                </div>
+                <div class="text-center">
+                    <button 
+                        type="submit"
+                        class="bg-blue-600 hover:bg-blue-700 px-8 py-3 rounded-lg font-semibold transition-colors inline-block"
+                    >
+                        Send Message
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<%- include('partials/travel-modal') %>
+
+<script>
+const cityData = {
+    beijing: {
+        title: 'Beijing, China',
+        titleColor: 'text-red-500', // Traditional Chinese red
+        image: 'https://cdn.pixabay.com/photo/2020/09/17/11/39/path-5578851_960_720.jpg',
+        bestTime: 'September to November (Fall) or March to May (Spring)',
+        tips: [
+            'Learn basic Mandarin phrases',
+            'Download WeChat for local communication',
+            'Get a VPN before arriving',
+            'Use the subway system for transportation'
+        ],
+        places: [
+            'The Great Wall (Mutianyu section)',
+            'Forbidden City',
+            'Temple of Heaven',
+            'Summer Palace'
+        ],
+        youtubeUrl: 'https://www.youtube.com/watch?v=QXQLLA14MF4&list=PLgVLLECE4-Yh-9_WItNDBPJui6QZsBHrb&index=1'
+    },
+    paris: {
+        title: 'Paris, France',
+        titleColor: 'text-blue-500',
+        image: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800',
+        bestTime: 'April to October, especially June and September',
+        tips: [
+            'Learn basic French greetings',
+            'Buy Museum Pass for attractions',
+            'Book Eiffel Tower tickets in advance',
+            'Use the Metro for transportation'
+        ],
+        places: [
+            'Eiffel Tower',
+            'Louvre Museum',
+            'Notre-Dame Cathedral',
+            'Montmartre'
+        ],
+        youtubeUrl: 'https://www.youtube.com/watch?v=QXQLLA14MF4&list=PLgVLLECE4-Yh-9_WItNDBPJui6QZsBHrb&index=1'
+    },
+    tokyo: {
+        title: 'Tokyo, Japan',
+        titleColor: 'text-pink-400', // Cherry blossom pink
+        image: 'https://cdn.pixabay.com/photo/2020/01/31/07/23/tokyo-4807294_960_720.jpg',
+        bestTime: 'March to May and September to November',
+        tips: [
+            'Learn basic Japanese phrases',
+            'Download Google Maps for navigation',
+            'Use QR codes for public transport',
+            'Try local street food'
+        ],
+        places: [
+            'Shibuya Crossing',
+            'Senso-ji Temple',
+            'Akihabara Electronics District',
+            'Ghibli Museum'
+        ],
+        youtubeUrl: 'https://www.youtube.com/watch?v=QXQLLA14MF4&list=PLgVLLECE4-Yh-9_WItNDBPJui6QZsBHrb&index=1'
+    },
+    newyork: {
+        title: 'New York, USA',
+        titleColor: 'text-yellow-400', // NYC taxi yellow
+        image: 'https://media.nomadicmatt.com/2022/newnycguidemain.jpeg',
+        bestTime: 'April to June and September to November',
+        tips: [
+            'Learn basic English phrases',
+            'Download Google Maps for navigation',
+            'Use Uber for transportation',
+            'Explore the Statue of Liberty'
+        ],
+        places: [
+            'Statue of Liberty',
+            'Central Park',
+            'Times Square',
+            'Empire State Building'
+        ],
+        youtubeUrl: 'https://www.youtube.com/watch?v=QXQLLA14MF4&list=PLgVLLECE4-Yh-9_WItNDBPJui6QZsBHrb&index=1'
+    },
+    venice: {
+        title: 'Venice, Italy',
+        titleColor: 'text-blue-600', // Changed to blue for better modal contrast
+        image: 'https://images.unsplash.com/photo-1534113414509-0eec2bfb493f?w=800', // Woman walking dog in St. Mark's Square
+        bestTime: 'April to October',
+        tips: [
+            'Learn basic Italian phrases',
+            'Use Vaporetti for water transportation',
+            'Explore the Rialto Bridge',
+            'Visit the Peggy Guggenheim Collection'
+        ],
+        places: [
+            'St. Mark\'s Square',
+            'Rialto Bridge',
+            'Doge\'s Palace',
+            'Murano Island'
+        ],
+        youtubeUrl: 'https://www.youtube.com/watch?v=QXQLLA14MF4&list=PLgVLLECE4-Yh-9_WItNDBPJui6QZsBHrb&index=1'
+    },
+    mexicocity: {
+        title: 'Mexico City, Mexico',
+        titleColor: 'text-green-500', // Mexican green
+        image: 'https://images.unsplash.com/photo-1585464231875-d9ef1f5ad396?w=800',
+        bestTime: 'November to April',
+        tips: [
+            'Learn basic Spanish phrases',
+            'Download Google Maps for navigation',
+            'Use Uber for transportation',
+            'Explore the Templo Mayor'
+        ],
+        places: [
+            'Templo Mayor',
+            'Zocalo',
+            'Teatro de la Ciudad',
+            'Palacio de Bellas Artes'
+        ],
+        youtubeUrl: 'https://www.youtube.com/watch?v=QXQLLA14MF4&list=PLgVLLECE4-Yh-9_WItNDBPJui6QZsBHrb&index=1'
+    }
+};
+
+function showTravelTips(city) {
+    const data = cityData[city];
+    const modalTitle = document.getElementById('modalTitle');
+    
+    // Set title with color
+    modalTitle.textContent = data.title;
+    modalTitle.className = `text-3xl font-bold mb-4 ${data.titleColor}`;
+    
+    document.getElementById('modalImage').src = data.image;
+    document.getElementById('modalBestTime').textContent = data.bestTime;
+    
+    const tipsHtml = data.tips.map(tip => `<li>${tip}</li>`).join('');
+    document.getElementById('modalTips').innerHTML = tipsHtml;
+    
+    const placesHtml = data.places.map(place => `<li>${place}</li>`).join('');
+    document.getElementById('modalPlaces').innerHTML = placesHtml;
+    
+    // Update YouTube link
+    const youtubeLink = document.getElementById('modalYoutubeLink');
+    if (data.youtubeUrl) {
+        youtubeLink.href = data.youtubeUrl;
+        youtubeLink.parentElement.classList.remove('hidden');
+    } else {
+        youtubeLink.parentElement.classList.add('hidden');
+    }
+    
+    document.getElementById('travelModal').classList.remove('hidden');
+}
+
+function closeModal() {
+    document.getElementById('travelModal').classList.add('hidden');
+}
+
+// Close modal when clicking outside
+document.getElementById('travelModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        closeModal();
+    }
+});
+
+// Close modal with ESC key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeModal();
+    }
+});
+
+async function searchDestinations() {
+    const query = document.getElementById('searchInput').value;
+    const resultsDiv = document.getElementById('searchResults');
+
+    try {
+        const response = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
+        const destinations = await response.json();
+
+        resultsDiv.innerHTML = destinations.map(dest => `
+            <div class="bg-white/10 backdrop-blur-md rounded-lg overflow-hidden">
+                <img src="${dest.imageUrl}" alt="${dest.name}" class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold mb-2">${dest.name}, ${dest.country}</h3>
+                    <p class="text-gray-300 mb-4">${dest.description}</p>
+                    <p class="text-sm text-blue-400">Best time to visit: ${dest.bestTimeToVisit}</p>
+                </div>
+            </div>
+        `).join('');
+    } catch (error) {
+        console.error('Search failed:', error);
+    }
+}
+
+document.getElementById('contactForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    
+    const data = {
+        name: formData.get('name'),
+        email: formData.get('email'),
+        message: formData.get('message')
+    };
+
+    try {
+        const response = await fetch('/api/contact', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (response.ok) {
+            alert('Thank you for your message! We\'ll be in touch soon.');
+            e.target.reset();
+        } else {
+            alert('Failed to send message. Please try again.');
+        }
+    } catch (error) {
+        console.error('Failed to send message:', error);
+        alert('Failed to send message. Please try again.');
+    }
+});
+</script> 

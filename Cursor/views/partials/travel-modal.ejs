@@ -1,0 +1,39 @@
+<div id="travelModal" class="fixed inset-0 z-50 hidden">
+    <!-- Overlay -->
+    <div class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
+    
+    <!-- Modal -->
+    <div class="relative top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl bg-white/90 backdrop-blur-md rounded-2xl shadow-xl p-6">
+        <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+        
+        <div id="modalContent">
+            <h2 id="modalTitle" class="text-3xl font-bold mb-4"></h2>
+            <img id="modalImage" class="w-full h-64 object-cover rounded-lg mb-4" src="" alt="">
+            <div class="space-y-4">
+                <div>
+                    <h3 class="text-xl font-semibold text-blue-600 mb-2">Best Time to Visit</h3>
+                    <p id="modalBestTime" class="text-gray-600"></p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold text-blue-600 mb-2">Travel Tips</h3>
+                    <ul id="modalTips" class="list-disc list-inside text-gray-600 space-y-2"></ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold text-blue-600 mb-2">Must-Visit Places</h3>
+                    <ul id="modalPlaces" class="list-disc list-inside text-gray-600 space-y-2"></ul>
+                </div>
+                <!-- Add YouTube button -->
+                <div class="mt-6">
+                    <a id="modalYoutubeLink" href="" target="_blank" 
+                       class="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-red-700 text-white px-6 py-2 rounded-full transition-colors font-medium">
+                        Watch Travel Guide
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

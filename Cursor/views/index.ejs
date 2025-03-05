@@ -3,14 +3,15 @@
 
     <!-- Background image -->
     <div class="absolute inset-0 w-full h-full">
-        <img src="https://images.unsplash.com/photo-1583422409516-2895a77efded?w=1600" alt="Barcelona" class="w-full h-full object-cover">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1583422409516-2895a77efded?w=1600" alt="Barcelona" class="w-full h-full object-cover">
     </div>
     <!-- Logo in top left corner -->
     <div class="absolute inset-0 top-2 left-2 z-50">
-        <!-- <img src="/images/New_Logo.png" alt="TheMundoTravel Logo" class="w-6 h-6 mr-2 object-contain"> -->
+        <a href="/public/images/New_Logo.png" class="flex items-center object-cover">
             <span class="text-3xl md:text-5xl font-bold text-white filter drop-shadow-lg">
                 <span class="text-blue-400">The</span><span class="text-white">Mundo</span><span class="text-blue-400">Travel</span>
             </span>
+        </a>
     </div>
     <div class="absolute inset-0 bg-black/50 z-10"></div>
     <div class="container mx-auto px-6 relative z-20 text-center">
@@ -86,20 +87,19 @@
                         Search
                     </button>
                 </div>
-                <div id="searchResults" class="mt-6">
-                </div>
+                <div id="searchResults" class="mt-6"></div>
                 <div class="mt-8 text-center">
-                    <h3 class="text-xl font-semibold mb-4 text-white">Popular Destinations</h3>
+                    <h3 class="text-xl font-semibold mb-4">Popular Destinations</h3>
                     <div class="flex flex-wrap justify-center gap-4">
-                        <a href="https://en.wikipedia.org/wiki/Paris" target="_blank" 
+                        <a href="https://www.youtube.com/watch?v=16Ptw9H7ge4&list=PLgVLLECE4-YisHxgfX8giBPrjwZmoop5v&index=37" target="_blank" 
                            class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors">
                             Paris
                         </a>
-                        <a href="https://en.wikipedia.org/wiki/New_York_City" target="_blank" 
+                        <a href="https://www.youtube.com/watch?v=O5uiHoqIO0A&list=PLgVLLECE4-YjLc4_e-KPwDxCOdnmk6v26&index=3" target="_blank" 
                            class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors">
                             New York
                         </a>
-                        <a href="https://en.wikipedia.org/wiki/Shanghai" target="_blank" 
+                        <a href="https://www.youtube.com/watch?v=TiIcBTghoro&list=PLgVLLECE4-YjLc4_e-KPwDxCOdnmk6v26&index=8" target="_blank" 
                            class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors">
                             Shanghai
                         </a>
@@ -145,6 +145,14 @@
                         required
                     ></textarea>
                 </div>
+                <div id="submitStatus" class="text-center mt-4 hidden">
+                    <div class="loading">
+                        <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-white mx-auto"></div>
+                        <p class="text-white mt-2">Sending message...</p>
+                    </div>
+                    <p class="success text-green-400 hidden">Message sent successfully!</p>
+                    <p class="error text-red-400 hidden">Error sending message. Please try again.</p>
+                </div>
                 <div class="text-center">
                     <button 
                         type="submit"
@@ -160,7 +168,7 @@
 
 <%- include('partials/travel-modal') %>
 
-<script>
+<script type="text/javascript">
 const cityData = {
     beijing: {
         title: 'Beijing, China',
@@ -331,46 +339,112 @@ async function searchWikipedia() {
     resultsDiv.innerHTML = '<div class="text-center text-white">Searching...</div>';
 
     try {
-        // First, try to get an exact match using the opensearch API
-        const response = await fetch(`https://en.wikipedia.org/w/api.php?action=opensearch&search=${encodeURIComponent(searchTerm)}&limit=1&namespace=0&format=json&origin=*`);
-        const [term, titles, descriptions, urls] = await response.json();
+        // First, try to find the most relevant page using search
+        const searchResponse = await fetch(`https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(searchTerm)}&format=json&origin=*&srlimit=5`);
+        const searchData = await searchResponse.json();
 
-        // If no exact match is found
-        if (titles.length === 0) {
-            resultsDiv.innerHTML = '<div class="text-center text-white">No exact match found. Please try a different search term.</div>';
+        if (!searchData.query.search.length) {
+            resultsDiv.innerHTML = '<div class="text-center text-white">No matches found. Please try a different search term.</div>';
             return;
         }
 
-        // Get more details about the page
-        const pageResponse = await fetch(`https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exintro=1&explaintext=1&titles=${encodeURIComponent(titles[0])}&format=json&origin=*`);
-        const pageData = await pageResponse.json();
-        const page = Object.values(pageData.query.pages)[0];
-        
-        // Get the first paragraph and summarize it
-        const firstParagraph = page.extract.split('\n')[0];
-        let summary = firstParagraph;
-        // If the paragraph is too long, truncate it
-        if (summary.length > 150) {
-            summary = summary.substring(0, 150) + '...';
-        }
+        // Find the most relevant result (prioritize exact or close matches)
+        const bestMatch = findBestMatch(searchTerm, searchData.query.search);
+        const pageTitle = bestMatch.title;
+        const pageId = bestMatch.pageid;
 
-        const result = `
-            <div class="bg-blue-900/30 backdrop-blur-md rounded-lg p-6 text-center">
-                <h3 class="text-2xl font-semibold mb-4 text-white">${titles[0]}</h3>
-                <p class="text-gray-300 mb-6">${summary}</p>
-                <a href="${urls[0]}" 
-                   target="_blank"
-                   class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors">
-                    Read More on Wikipedia
-                </a>
-            </div>
-        `;
+        // Get the main image
+        const imageResponse = await fetch(`https://en.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&piprop=original&pageids=${pageId}&origin=*`);
+        const imageData = await imageResponse.json();
+        const imageUrl = imageData.query.pages[pageId]?.original?.source || null;
 
-        resultsDiv.innerHTML = result;
+        // Get the full content
+        const fullContentResponse = await fetch(`https://en.wikipedia.org/w/api.php?action=query&pageids=${pageId}&format=json&origin=*&prop=extracts&explaintext=true`);
+        const fullContentData = await fullContentResponse.json();
+        const fullContent = fullContentData.query.pages[pageId].extract;
+
+        // Create the summary
+        const summary = createIntelligentSummary(fullContent);
+
+        resultsDiv.innerHTML = `
+            <div class="bg-gradient-to-r from-blue-900 via-blue-700 to-blue-900 backdrop-blur-md rounded-lg p-6 max-w-4xl mx-auto">
+                <h3 class="text-xl font-semibold mb-4 text-white">${pageTitle}</h3>
+                ${imageUrl ? `
+                    <div class="mb-4 rounded-lg overflow-hidden flex justify-center bg-black/30">
+                        <img src="${imageUrl}" alt="${pageTitle}" 
+                             class="max-w-full h-auto max-h-[500px] object-contain"
+                             onclick="window.open(this.src, '_blank')"
+                             style="cursor: zoom-in;">
+                    </div>
+                ` : ''}
+                <p class="text-gray-500 mb-6 text-lg leading-relaxed">${summary}</p>
+                <div class="text-center">
+                    <a href="https://en.wikipedia.org/wiki/${encodeURIComponent(pageTitle)}" 
+                       target="_blank"
+                       class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition-colors">
+                        Read More on Wikipedia
+                    </a>
+                </div>
+            </div>`;
     } catch (error) {
         resultsDiv.innerHTML = '<div class="text-center text-white">Error fetching results. Please try again.</div>';
         console.error('Error:', error);
     }
+}
+
+// Helper function to find the best match from search results
+function findBestMatch(searchTerm, results) {
+    searchTerm = searchTerm.toLowerCase();
+    
+    // First, try to find an exact match (ignoring case and diacritics)
+    const exactMatch = results.find(result => 
+        removeDiacritics(result.title.toLowerCase()) === removeDiacritics(searchTerm)
+    );
+    if (exactMatch) return exactMatch;
+
+    // Then, try to find a match that starts with the search term
+    const startsWith = results.find(result => 
+        removeDiacritics(result.title.toLowerCase()).startsWith(removeDiacritics(searchTerm))
+    );
+    if (startsWith) return startsWith;
+
+    // If no better match is found, return the first result (highest relevance score)
+    return results[0];
+}
+
+// Helper function to remove diacritics
+function removeDiacritics(str) {
+    return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+}
+
+// Helper function to create an intelligent summary
+function createIntelligentSummary(content) {
+    // Remove citations
+    content = content.replace(/\[\d+\]/g, '');
+    
+    // Split into paragraphs
+    const paragraphs = content.split('\n\n');
+    
+    // Get key information
+    const keyInfo = {
+        mainDesc: paragraphs[0].split('.')[0] + '.',  // First sentence of first paragraph
+        location: content.match(/located (?:in|at) [^.]+\./i)?.[0] || '',
+        population: content.match(/population (?:of |is )?[\d,.]+ (?:million people|\(\d{4}\))/i)?.[0] || '',
+        founded: content.match(/(?:founded|established|built) in \d+/i)?.[0] || '',
+        capital: content.match(/capital (?:city )?of [^.]+\./i)?.[0] || ''
+    };
+
+    // Combine relevant information
+    let summary = keyInfo.mainDesc;
+    
+    const additionalInfo = [keyInfo.location, keyInfo.capital, keyInfo.population, keyInfo.founded]
+        .filter(info => info && !summary.includes(info));
+    
+    if (additionalInfo.length > 0) {
+        summary += ' ' + additionalInfo.join(' ');
+    }
+
+    return summary;
 }
 
 // Add event listener for Enter key
@@ -380,18 +454,31 @@ document.getElementById('searchInput').addEventListener('keypress', function(e) 
     }
 });
 
+// Move API endpoint to environment variable
+const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT || 'https://24pepvwnte.execute-api.us-east-1.amazonaws.com/dev';
+
 document.getElementById('contactForm').addEventListener('submit', async (e) => {
     e.preventDefault();
-    const formData = new FormData(e.target);
+    const submitStatus = document.getElementById('submitStatus');
+    const loadingEl = submitStatus.querySelector('.loading');
+    const successEl = submitStatus.querySelector('.success');
+    const errorEl = submitStatus.querySelector('.error');
     
-    const data = {
-        name: formData.get('name'),
-        email: formData.get('email'),
-        message: formData.get('message')
-    };
-
     try {
-        const response = await fetch('/api/contact', {
+        // Show loading state
+        submitStatus.classList.remove('hidden');
+        loadingEl.classList.remove('hidden');
+        successEl.classList.add('hidden');
+        errorEl.classList.add('hidden');
+        
+        const formData = new FormData(e.target);
+        const data = {
+            name: formData.get('name'),
+            email: formData.get('email'),
+            message: formData.get('message')
+        };
+
+        const response = await fetch(API_ENDPOINT, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -399,15 +486,41 @@ document.getElementById('contactForm').addEventListener('submit', async (e) => {
             body: JSON.stringify(data)
         });
 
+        const result = await response.json();
+
         if (response.ok) {
-            alert('Thank you for your message! We\'ll be in touch soon.');
+            // Show success message
+            loadingEl.classList.add('hidden');
+            successEl.classList.remove('hidden');
             e.target.reset();
+            
+            // Hide success message after 3 seconds
+            setTimeout(() => {
+                submitStatus.classList.add('hidden');
+            }, 3000);
         } else {
-            alert('Failed to send message. Please try again.');
+            throw new Error(result.error || 'Failed to send message');
         }
     } catch (error) {
         console.error('Failed to send message:', error);
-        alert('Failed to send message. Please try again.');
+        loadingEl.classList.add('hidden');
+        errorEl.classList.remove('hidden');
     }
 });
-</script> 
+</script>
+
+<!-- Add to your head section -->
+<meta name="description" content="Explore amazing travel destinations worldwide with TheMundoTravel. Find travel tips, guides, and plan your next adventure.">
+<meta name="keywords" content="travel, destinations, tourism, city guides, travel tips">
+<meta name="author" content="TheMundoTravel">
+<meta property="og:title" content="TheMundoTravel - Explore The World">
+<meta property="og:description" content="Discover amazing destinations and create unforgettable memories">
+<meta property="og:image" content="[Your Logo URL]">
+<meta property="og:url" content="[Your Website URL]">
+
+<!-- Security Headers -->
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+<meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' https: 'unsafe-inline' 'unsafe-eval';"> 

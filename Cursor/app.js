@@ -2,10 +2,8 @@ const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
 const nodemailer = require('nodemailer');
 const path = require('path');
-require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(express.static('public'));
@@ -121,12 +119,10 @@ app.use((err, req, res, next) => {
     });
 });
 
-// Export the app instead of starting it
-module.exports = app;
+// Important: Use port 8081 for Elastic Beanstalk
+const port = process.env.PORT || 8081;
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+});
 
-// Only start the server if this file is run directly
-if (require.main === module) {
-    app.listen(PORT, () => {
-        console.log(`Server is running on port ${PORT}`);
-    });
-} 
+module.exports = app; 

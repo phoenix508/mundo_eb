@@ -1,0 +1,24 @@
+version: 1
+applications:
+  - frontend:
+      phases:
+        preBuild:
+          commands:
+            - npm install
+        build:
+          commands:
+            - npm run build
+      artifacts:
+        baseDirectory: /
+        files:
+          - '**/*'
+    appRoot: /
+backend:
+  phases:
+    build:
+      commands:
+        - '# Execute build commands'
+  artifacts:
+    baseDirectory: /
+    files:
+      - '**/*'

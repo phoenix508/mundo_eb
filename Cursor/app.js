@@ -15,6 +15,7 @@ app.use(expressLayouts);
 
 // View engine
 app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 app.set('layout', 'layout');
 
 // Email configuration
@@ -77,10 +78,7 @@ const galleryImages = [
 
 // Routes
 app.get('/', (req, res) => {
-    res.render('index', {
-        title: 'Home',
-        message: 'Welcome to Travel Explorer'
-    });
+    res.render('index');
 });
 
 app.get('/gallery', (req, res) => {
@@ -124,5 +122,5 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+    console.log(`Server is running on port ${PORT}`);
 }); 

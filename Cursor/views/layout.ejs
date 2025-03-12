@@ -42,6 +42,9 @@
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
             border-radius: 1rem;
             height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .card-zoom-image {
@@ -97,6 +100,137 @@
         .bg-mexicocity {
             background-image: url('https://images.unsplash.com/photo-1585464231875-d9ef1f5ad396?w=800');
         }
+
+        /* Animated background styles */
+        .stars {
+            background: transparent;
+        }
+
+        .star {
+            fill: white;
+            animation: twinkle 1s infinite;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        /* Generate multiple stars */
+        @for $i from 1 through 50 {
+            .star:nth-child(#{$i}) {
+                transform: translate(
+                    #{random(100)}vw,
+                    #{random(100)}vh
+                );
+                animation-delay: #{random(1000)/1000}s;
+            }
+        }
+
+        /* Gradient overlay for sections */
+        .section-overlay {
+            background: linear-gradient(
+                to bottom,
+                rgba(0, 0, 0, 0.3),
+                rgba(0, 0, 0, 0.5)
+            );
+        }
+
+        /* Animated gradient background */
+        @keyframes gradient-x {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .animate-gradient-x {
+            background-size: 400% 400%;
+            animation: gradient-x 15s ease infinite;
+        }
+
+        /* Parallax stars effect */
+        .stars-container {
+            perspective: 1000px;
+            transform-style: preserve-3d;
+        }
+
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        #stars1 { transform: translateZ(-300px); animation: stars-move-1 60s linear infinite; }
+        #stars2 { transform: translateZ(-200px); animation: stars-move-2 45s linear infinite; }
+        #stars3 { transform: translateZ(-100px); animation: stars-move-3 30s linear infinite; }
+
+        @keyframes stars-move-1 {
+            0% { transform: translateZ(-300px) rotate(0deg); }
+            100% { transform: translateZ(-300px) rotate(360deg); }
+        }
+
+        @keyframes stars-move-2 {
+            0% { transform: translateZ(-200px) rotate(0deg); }
+            100% { transform: translateZ(-200px) rotate(-360deg); }
+        }
+
+        @keyframes stars-move-3 {
+            0% { transform: translateZ(-100px) rotate(0deg); }
+            100% { transform: translateZ(-100px) rotate(360deg); }
+        }
+
+        /* Mesh gradient animation */
+        .mesh-gradient {
+            background: radial-gradient(circle at center,
+                rgba(139, 92, 246, 0.3) 0%,
+                rgba(30, 58, 138, 0.3) 50%,
+                rgba(88, 28, 135, 0.3) 100%);
+            filter: blur(100px);
+            height: 100%;
+            animation: mesh-move 20s ease-in-out infinite;
+        }
+
+        @keyframes mesh-move {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-5%, 5%); }
+        }
+
+        /* Fade in animations */
+        .animate-fade-in {
+            animation: fade-in 1s ease-out;
+        }
+
+        .animate-fade-in-delay {
+            animation: fade-in 1s ease-out 0.3s both;
+        }
+
+        .animate-fade-in-delay-2 {
+            animation: fade-in 1s ease-out 0.6s both;
+        }
+
+        @keyframes fade-in {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Enhanced card styling */
+        .card-zoom {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .card-zoom:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
     </style>
 
     <!-- SEO Meta Tags -->
@@ -116,6 +250,7 @@
                     <a href="/" class="text-white hover:text-blue-400 transition-colors">Home</a>
                     <a href="#destinations" class="text-white hover:text-blue-400 transition-colors">Destinations</a>
                     <a href="/gallery" class="text-white hover:text-blue-400 transition-colors">Gallery</a>
+                    <a href="/travel-tips" class="text-white hover:text-blue-400 transition-colors">Travel Tips</a>
                     <a href="#contact" class="text-white hover:text-blue-400 transition-colors">Contact</a>
                 </div>
             </div>

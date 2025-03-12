@@ -2,6 +2,9 @@ const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
 const nodemailer = require('nodemailer');
 const path = require('path');
+const axios = require('axios');
+const { spawn } = require('child_process'); // Import child_process to run Python scripts
+// require('dotenv').config(); // Load environment variables
 
 const app = express();
 
@@ -86,6 +89,31 @@ app.get('/gallery', (req, res) => {
     });
 });
 
+// Proxy route for Google Places API
+app.get('/api/places/:city', async (req, res) => {
+    const city = req.params.city;
+    const apiKey = 'AIzaSyCH5NW0jRXN-etOPHxWQhpJR2NVpzAgMAA';
+
+    try {
+        const response = await axios.get(`https://maps.googleapis.com/maps/api/place/textsearch/json`, {
+            params: {
+                query: `top attractions in ${city}`,
+                key: apiKey
+            }
+        });
+
+        const attractions = response.data.results.slice(0, 3).map(attraction => ({
+            name: attraction.name,
+            description: attraction.formatted_address // You can customize this to include more details
+        }));
+
+        res.json(attractions);
+    } catch (error) {
+        console.error('Error fetching data from Google Places API:', error);
+        res.status(500).json({ error: 'Failed to fetch attractions' });
+    }
+});
+
 // Save contact information
 app.post('/api/contact', async (req, res) => {
     try {
@@ -108,6 +136,34 @@ app.post('/api/contact', async (req, res) => {
         console.error('Email error:', error);
         res.status(500).json({ error: 'Failed to send message' });
     }
+});
+
+// New route for AI agent
+app.post('/api/ask-agent', async (req, res) => {
+    const { question } = req.body;
+    console.log('Received question:', question); // Debugging line
+
+    // Call the Python script
+    const pythonProcess = spawn('python', ['util.py', question]);
+
+    pythonProcess.stdout.on('data', (data) => {
+        console.log('Data from Python script:', data.toString()); // Log the output
+        res.json({ response: data.toString() });
+    });
+
+    pythonProcess.stderr.on('data', (data) => {
+        console.error(`stderr: ${data}`);
+        res.status(500).json({ error: 'Error communicating with AI agent' });
+    });
+
+    pythonProcess.on('close', (code) => {
+        console.log(`Python process exited with code ${code}`); // Debugging line
+    });
+});
+
+// Add this route in your existing routes section
+app.get('/travel-tips', (req, res) => {
+    res.render('travel-tips', { title: 'Travel Tips' });
 });
 
 // Error handler

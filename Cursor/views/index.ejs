@@ -1,20 +1,21 @@
-<!-- Hero Section -->
+<!-- Hero Section with new dynamic background -->
 <section id="home" class="h-screen flex items-center justify-center relative overflow-hidden">
-
     <!-- Background image -->
-    <div class="absolute inset-0 w-full h-full">
-        <img loading="lazy" src="https://images.unsplash.com/photo-1583422409516-2895a77efded?w=1600" alt="Barcelona" class="w-full h-full object-cover">
-    </div>
-    <div class="absolute inset-0 bg-black/50 z-10"></div>
+    <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://cdn.pixabay.com/photo/2019/07/21/07/12/new-york-4352072_960_720.jpg');"></div>
+    
+    <!-- Overlay for better text visibility -->
+    <div class="absolute inset-0 bg-black/50 backdrop-blur-sm z-10"></div>
+    
+    <!-- Main content -->
     <div class="container mx-auto px-6 relative z-20 text-center">
-        <h1 class="text-5xl md:text-7xl font-bold mb-6 text-white">Explore The World</h1>
-        <p class="text-xl md:text-2xl mb-8 text-gray-200">Discover amazing destinations and create unforgettable memories</p>
-        <div class="flex justify-center gap-4">
-            <a href="#destinations" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full text-lg font-semibold transition-colors">
+        <h1 class="text-5xl md:text-7xl font-bold mb-6 text-white animate-fade-in">Explore The World</h1>
+        <p class="text-xl md:text-2xl mb-8 text-gray-200 animate-fade-in-delay">Discover amazing destinations and create unforgettable memories</p>
+        <div class="flex justify-center gap-4 animate-fade-in-delay-2">
+            <a href="#destinations" class="bg-blue-600/80 hover:bg-blue-700 text-white px-8 py-3 rounded-full text-lg font-semibold transition-all hover:scale-105 backdrop-blur-sm">
                 Start Exploring
             </a>
-            <a href="https://shorturl.at/6BqcK" target="_blank" 
-               class="bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded-full text-lg font-semibold transition-colors flex items-center gap-2">
+            <a href="https://www.youtube.com/@themundotravel?sub_confirmation=1" target="_blank" 
+               class="bg-red-600/80 hover:bg-red-700 text-white px-8 py-3 rounded-full text-lg font-semibold transition-all hover:scale-105 backdrop-blur-sm flex items-center gap-2">
                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/>
                     <path fill="white" d="M9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
@@ -25,139 +26,192 @@
     </div>
 </section>
 
-<!-- Featured Destinations -->
-<section class="py-20">
-    <div class="container mx-auto px-6">
-        <h2 class="text-4xl font-bold text-center mb-12 text-white">Explore The World With Us</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- Destination Cards with Hover Effect -->
-            <div class="card-zoom cursor-pointer" onclick="showTravelTips('beijing')">
-                <div class="card-zoom-image bg-beijing"></div>
-                <h3 class="card-zoom-text">Beijing</h3>
-            </div>
-            <div class="card-zoom cursor-pointer" onclick="showTravelTips('paris')">
-                <div class="card-zoom-image bg-paris"></div>
-                <h3 class="card-zoom-text">Paris</h3>
-            </div>
-            <div class="card-zoom cursor-pointer" onclick="showTravelTips('tokyo')">
-                <div class="card-zoom-image bg-tokyo"></div>
-                <h3 class="card-zoom-text">Tokyo</h3>
-            </div>
-            <div class="card-zoom cursor-pointer" onclick="showTravelTips('newyork')">
-                <div class="card-zoom-image bg-newyork"></div>
-                <h3 class="card-zoom-text">New York</h3>
-            </div>
-            <div class="card-zoom cursor-pointer" onclick="showTravelTips('venice')">
-                <div class="card-zoom-image bg-venice"></div>
-                <h3 class="card-zoom-text">Venice</h3>
-            </div>
-            <div class="card-zoom cursor-pointer" onclick="showTravelTips('mexicocity')">
-                <div class="card-zoom-image bg-mexicocity"></div>
-                <h3 class="card-zoom-text">Mexico City</h3>
-            </div>
-        </div>
+<!-- Rest of the page with new background -->
+<div class="relative bg-gradient-to-b from-black via-blue-900 to-black min-h-screen">
+    <!-- Animated mesh gradient background -->
+    <div class="absolute inset-0 opacity-30 mix-blend-overlay">
+        <div class="mesh-gradient"></div>
     </div>
-</section>
 
-<!-- Search Section -->
-<section id="destinations" class="py-20">
-    <div class="container mx-auto px-6">
-        <div class="max-w-3xl mx-auto">
-            <h2 class="text-4xl font-bold text-center mb-12 text-white">Find Your Perfect Destination</h2>
-            <div class="bg-white/10 backdrop-blur-md rounded-lg p-6">
-                <div class="flex gap-4">
-                    <input 
-                        type="text" 
-                        id="searchInput"
-                        class="flex-1 px-4 py-3 rounded-lg bg-gradient-to-br from-grey/10 to-grey/20 backdrop-blur-md border border-white/30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        placeholder="Search destinations..."
-                    >
-                    <button 
-                        onclick="searchWikipedia()"
-                        class="bg-blue-600 hover:bg-blue-700 px-8 py-3 rounded-lg font-semibold transition-colors"
-                    >
-                        Search
-                    </button>
+    <!-- Featured Destinations -->
+    <section class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12 text-white">Explore The World With Us</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Destination Cards with Hover Effect -->
+                <div class="card-zoom cursor-pointer" onclick="showTravelTips('beijing')">
+                    <div class="card-zoom-image bg-beijing"></div>
+                    <h3 class="card-zoom-text">Beijing</h3>
                 </div>
-                <div id="searchResults" class="mt-6"></div>
-                <div class="mt-8 text-center">
-                    <h3 class="text-xl font-semibold mb-4">Popular Destinations</h3>
-                    <div class="flex flex-wrap justify-center gap-4">
-                        <a href="https://www.youtube.com/watch?v=16Ptw9H7ge4&list=PLgVLLECE4-YisHxgfX8giBPrjwZmoop5v&index=37" target="_blank" 
-                           class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors">
-                            Paris
-                        </a>
-                        <a href="https://www.youtube.com/watch?v=O5uiHoqIO0A&list=PLgVLLECE4-YjLc4_e-KPwDxCOdnmk6v26&index=3" target="_blank" 
-                           class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors">
-                            New York
-                        </a>
-                        <a href="https://www.youtube.com/watch?v=TiIcBTghoro&list=PLgVLLECE4-YjLc4_e-KPwDxCOdnmk6v26&index=8" target="_blank" 
-                           class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors">
-                            Shanghai
-                        </a>
-                    </div>
+                <div class="card-zoom cursor-pointer" onclick="showTravelTips('paris')">
+                    <div class="card-zoom-image bg-paris"></div>
+                    <h3 class="card-zoom-text">Paris</h3>
+                </div>
+                <div class="card-zoom cursor-pointer" onclick="showTravelTips('tokyo')">
+                    <div class="card-zoom-image bg-tokyo"></div>
+                    <h3 class="card-zoom-text">Tokyo</h3>
+                </div>
+                <div class="card-zoom cursor-pointer" onclick="showTravelTips('newyork')">
+                    <div class="card-zoom-image bg-newyork"></div>
+                    <h3 class="card-zoom-text">New York</h3>
+                </div>
+                <div class="card-zoom cursor-pointer" onclick="showTravelTips('venice')">
+                    <div class="card-zoom-image bg-venice"></div>
+                    <h3 class="card-zoom-text">Venice</h3>
+                </div>
+                <div class="card-zoom cursor-pointer" onclick="showTravelTips('mexicocity')">
+                    <div class="card-zoom-image bg-mexicocity"></div>
+                    <h3 class="card-zoom-text">Mexico City</h3>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Contact Section -->
-<section id="contact" class="py-20 bg-black/30 backdrop-blur-md">
-    <div class="container mx-auto px-6">
-        <div class="max-w-3xl mx-auto">
-            <h2 class="text-4xl font-bold text-center mb-12">Get in Touch</h2>
-            <form id="contactForm" class="space-y-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label class="block text-sm font-medium mb-2">Name</label>
+    <!-- Search Section -->
+    <section id="destinations" class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-4xl font-bold text-center mb-12 text-white">Find Your Perfect Destination</h2>
+                <div class="bg-white/10 backdrop-blur-md rounded-lg p-6">
+                    <div class="flex gap-4">
                         <input 
                             type="text" 
-                            name="name" 
-                            class="w-full px-4 py-3 rounded-lg bg-white/20 backdrop-blur-md border border-white/30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            required
+                            id="searchInput"
+                            class="flex-1 px-4 py-3 rounded-lg bg-gradient-to-br from-grey/10 to-grey/20 backdrop-blur-md border border-white/30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            placeholder="Search destinations..."
                         >
+                        <button 
+                            onclick="searchWikipedia()"
+                            class="bg-blue-600 hover:bg-blue-700 px-8 py-3 rounded-lg font-semibold transition-colors"
+                        >
+                            Search
+                        </button>
+                    </div>
+                    <div id="searchResults" class="mt-6"></div>
+                    <div class="mt-8 text-center">
+                        <h3 class="text-xl font-semibold mb-4">Popular Destinations</h3>
+                        <div class="flex flex-wrap justify-center gap-4">
+                            <a href="https://www.youtube.com/watch?v=16Ptw9H7ge4&list=PLgVLLECE4-YisHxgfX8giBPrjwZmoop5v&index=37" target="_blank" 
+                               class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors">
+                                Paris
+                            </a>
+                            <a href="https://www.youtube.com/watch?v=O5uiHoqIO0A&list=PLgVLLECE4-YjLc4_e-KPwDxCOdnmk6v26&index=3" target="_blank" 
+                               class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors">
+                                New York
+                            </a>
+                            <a href="https://www.youtube.com/watch?v=TiIcBTghoro&list=PLgVLLECE4-YjLc4_e-KPwDxCOdnmk6v26&index=8" target="_blank" 
+                               class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors">
+                                Shanghai
+                            </a>
+                            <a href="https://www.youtube.com/watch?v=cACm6guqz9s&list=PLgVLLECE4-Yh-9_WItNDBPJui6QZsBHrb&index=8" target="_blank" 
+                               class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors">
+                                Chongqing
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-4xl font-bold text-center mb-12">Get in Touch</h2>
+                <form id="contactForm" class="space-y-6" onsubmit="return validateForm(event)">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Name <span class="text-red-500">*</span></label>
+                            <input 
+                                type="text" 
+                                name="name" 
+                                id="name"
+                                class="w-full px-4 py-3 rounded-lg bg-white/20 backdrop-blur-md border border-white/30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                placeholder="Enter your name"
+                                required
+                                minlength="2"
+                            >
+                            <p id="nameError" class="text-red-400 text-sm mt-1 hidden">Please enter your name (minimum 2 characters)</p>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Email <span class="text-red-500">*</span></label>
+                            <input 
+                                type="email" 
+                                name="email" 
+                                id="email"
+                                class="w-full px-4 py-3 rounded-lg bg-white/20 backdrop-blur-md border border-white/30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                placeholder="your@email.com"
+                                required
+                                pattern="[a-z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,}$"
+                            >
+                            <p id="emailError" class="text-red-400 text-sm mt-1 hidden">Please enter a valid email address</p>
+                        </div>
                     </div>
                     <div>
-                        <label class="block text-sm font-medium mb-2">Email</label>
-                        <input 
-                            type="email" 
-                            name="email" 
+                        <label class="block text-sm font-medium mb-2">Message <span class="text-red-500">*</span></label>
+                        <textarea 
+                            name="message" 
+                            id="message"
+                            rows="5" 
                             class="w-full px-4 py-3 rounded-lg bg-white/20 backdrop-blur-md border border-white/30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            placeholder="Enter your message here..."
                             required
+                            minlength="10"
+                        ></textarea>
+                        <p id="messageError" class="text-red-400 text-sm mt-1 hidden">Please enter a message (minimum 10 characters)</p>
+                    </div>
+                    <div id="submitStatus" class="text-center mt-4 hidden">
+                        <div class="loading">
+                            <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-white mx-auto"></div>
+                            <p class="text-white mt-2">Sending message...</p>
+                        </div>
+                        <p class="success text-green-400 hidden">Message sent successfully!</p>
+                        <p class="error text-red-400 hidden">Error sending message. Please try again.</p>
+                    </div>
+                    <div class="text-center">
+                        <button 
+                            type="submit"
+                            class="bg-blue-600 hover:bg-blue-700 px-8 py-3 rounded-lg font-semibold transition-colors inline-block"
                         >
+                            Send Message
+                        </button>
                     </div>
-                </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Agent Section -->
+    <section id="ai-agent" class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12 text-white">Ask Our AI Agent</h2>
+            <form id="aiForm" class="space-y-6" onsubmit="return askAgent(event)">
                 <div>
-                    <label class="block text-sm font-medium mb-2">Message</label>
-                    <textarea 
-                        name="message" 
-                        rows="5" 
+                    <label class="block text-sm font-medium mb-2">Your Question <span class="text-red-500">*</span></label>
+                    <input 
+                        type="text" 
+                        id="questionInput"
                         class="w-full px-4 py-3 rounded-lg bg-white/20 backdrop-blur-md border border-white/30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        placeholder="What would you like to know?"
                         required
-                    ></textarea>
+                    >
                 </div>
-                <div id="submitStatus" class="text-center mt-4 hidden">
-                    <div class="loading">
-                        <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-white mx-auto"></div>
-                        <p class="text-white mt-2">Sending message...</p>
-                    </div>
-                    <p class="success text-green-400 hidden">Message sent successfully!</p>
-                    <p class="error text-red-400 hidden">Error sending message. Please try again.</p>
+                <div id="aiResponse" class="text-center mt-4 hidden">
+                    <p class="text-white">AI Response: <span id="responseText" class="font-bold"></span></p>
                 </div>
                 <div class="text-center">
                     <button 
-                        type="button"
-                        onclick="submitForm()"
+                        type="submit"
                         class="bg-blue-600 hover:bg-blue-700 px-8 py-3 rounded-lg font-semibold transition-colors inline-block"
                     >
-                        Send Message
+                        Ask
                     </button>
                 </div>
             </form>
         </div>
-    </div>
-</section>
+    </section>
+</div>
 
 <%- include('partials/travel-modal') %>
 
@@ -199,10 +253,10 @@ const cityData = {
             'Notre-Dame Cathedral',
             'Montmartre'
         ],
-        youtubeUrl: 'https://www.youtube.com/watch?v=QXQLLA14MF4&list=PLgVLLECE4-Yh-9_WItNDBPJui6QZsBHrb&index=1'
+        youtubeUrl: 'https://www.youtube.com/watch?v=KYzuFjq6uaY&list=PLgVLLECE4-YisHxgfX8giBPrjwZmoop5v&index=30'
     },
-    tokyo: {
-        title: 'Tokyo, Japan',
+    kyoto: {
+        title: 'Kyoto, Japan',
         titleColor: 'text-pink-400', // Cherry blossom pink
         image: 'https://cdn.pixabay.com/photo/2020/01/31/07/23/tokyo-4807294_960_720.jpg',
         bestTime: 'March to May and September to November',
@@ -218,7 +272,7 @@ const cityData = {
             'Akihabara Electronics District',
             'Ghibli Museum'
         ],
-        youtubeUrl: 'https://www.youtube.com/watch?v=QXQLLA14MF4&list=PLgVLLECE4-Yh-9_WItNDBPJui6QZsBHrb&index=1'
+        youtubeUrl: 'https://www.youtube.com/watch?v=AcFxm07UPf4&list=PLgVLLECE4-Yh-9_WItNDBPJui6QZsBHrb&index=14'
     },
     newyork: {
         title: 'New York, USA',
@@ -237,7 +291,7 @@ const cityData = {
             'Times Square',
             'Empire State Building'
         ],
-        youtubeUrl: 'https://www.youtube.com/watch?v=QXQLLA14MF4&list=PLgVLLECE4-Yh-9_WItNDBPJui6QZsBHrb&index=1'
+        youtubeUrl: 'https://www.youtube.com/watch?v=O5uiHoqIO0A&list=PLgVLLECE4-YjQTDOlE1KdoLZ8oBRkw0h6&index=15'
     },
     venice: {
         title: 'Venice, Italy',
@@ -256,7 +310,7 @@ const cityData = {
             'Doge\'s Palace',
             'Murano Island'
         ],
-        youtubeUrl: 'https://www.youtube.com/watch?v=QXQLLA14MF4&list=PLgVLLECE4-Yh-9_WItNDBPJui6QZsBHrb&index=1'
+        youtubeUrl: 'https://www.youtube.com/watch?v=KYzuFjq6uaY&list=PLgVLLECE4-YisHxgfX8giBPrjwZmoop5v&index=30'
     },
     mexicocity: {
         title: 'Mexico City, Mexico',
@@ -275,7 +329,7 @@ const cityData = {
             'Teatro de la Ciudad',
             'Palacio de Bellas Artes'
         ],
-        youtubeUrl: 'https://www.youtube.com/watch?v=QXQLLA14MF4&list=PLgVLLECE4-Yh-9_WItNDBPJui6QZsBHrb&index=1'
+        youtubeUrl: 'https://www.youtube.com/watch?v=xkXr3HrcT1c&list=PLgVLLECE4-YiunXm_bzNuKB8tm-38DyeQ&index=3'
     }
 };
 
@@ -341,7 +395,7 @@ async function searchWikipedia() {
             return;
         }
 
-        // Find the most relevant result (prioritize exact or close matches)
+        // Find the most relevant result
         const bestMatch = findBestMatch(searchTerm, searchData.query.search);
         const pageTitle = bestMatch.title;
         const pageId = bestMatch.pageid;
@@ -359,6 +413,20 @@ async function searchWikipedia() {
         // Create the summary
         const summary = createIntelligentSummary(fullContent);
 
+        // Fetch top attractions from Google Places API
+        const placesResponse = await fetch(`/api/places/${encodeURIComponent(bestMatch.title)}`);
+        const attractions = await placesResponse.json();
+
+        // Create the attractions list with a more vibrant layout and a brief introduction
+        const attractionsHtml = attractions.map(attraction => `
+            <li class="mb-4 p-4 bg-blue-800 rounded-lg shadow-lg">
+                <h4 class="font-bold text-yellow-300">${attraction.name}</h4>
+                <p class="text-gray-200 mb-2">Discover the beauty of ${attraction.name}, a must-visit destination known for its stunning sights and rich culture.</p>
+                <span class="text-white">Description: </span>
+                <span class="text-gray-300">${attraction.description}</span>
+            </li>
+        `).join('');
+
         resultsDiv.innerHTML = `
             <div class="bg-gradient-to-r from-blue-900 via-blue-700 to-blue-900 backdrop-blur-md rounded-lg p-6 max-w-4xl mx-auto">
                 <h3 class="text-xl font-semibold mb-4 text-white">${pageTitle}</h3>
@@ -370,12 +438,14 @@ async function searchWikipedia() {
                              style="cursor: zoom-in;">
                     </div>
                 ` : ''}
-                <p class="text-gray-500 mb-6 text-lg leading-relaxed">${summary}</p>
+                <p class="text-white mb-6 text-lg leading-relaxed">${summary}</p>
+                <h4 class="text-lg font-semibold text-white">Top Attractions:</h4>
+                <ul class="text-gray-300">${attractionsHtml}</ul>
                 <div class="text-center">
-                    <a href="https://en.wikipedia.org/wiki/${encodeURIComponent(pageTitle)}" 
+                    <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(bestMatch.title)}" 
                        target="_blank"
                        class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition-colors">
-                        Read More on Wikipedia
+                        View on Google Maps
                     </a>
                 </div>
             </div>`;
@@ -389,6 +459,23 @@ async function searchWikipedia() {
 function findBestMatch(searchTerm, results) {
     searchTerm = searchTerm.toLowerCase();
     
+    // Define a mapping for fuzzy matches
+    const fuzzyMatches = {
+        'sf': 'San Francisco',
+        'la': 'Los Angeles',
+        'ny': 'New York City',
+        'nyc': 'New York City',
+        'new york': 'New York City',
+        'mexicocity': 'Mexico City'
+    };
+
+    // Check if the search term matches any fuzzy match
+    if (fuzzyMatches[searchTerm]) {
+        return results.find(result => 
+            removeDiacritics(result.title.toLowerCase()) === removeDiacritics(fuzzyMatches[searchTerm].toLowerCase())
+        );
+    }
+
     // First, try to find an exact match (ignoring case and diacritics)
     const exactMatch = results.find(result => 
         removeDiacritics(result.title.toLowerCase()) === removeDiacritics(searchTerm)
@@ -451,6 +538,44 @@ document.getElementById('searchInput').addEventListener('keypress', function(e) 
 // Remove the process.env reference and use the API endpoint directly
 const API_ENDPOINT = 'https://24pepvwnte.execute-api.us-east-1.amazonaws.com/dev';
 
+function validateForm(event) {
+    event.preventDefault();
+    
+    // Reset error messages
+    document.querySelectorAll('.text-red-400').forEach(el => el.classList.add('hidden'));
+    
+    let isValid = true;
+    
+    // Validate name
+    const name = document.getElementById('name');
+    if (!name.value || name.value.length < 2) {
+        document.getElementById('nameError').classList.remove('hidden');
+        isValid = false;
+    }
+    
+    // Validate email
+    const email = document.getElementById('email');
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!email.value || !emailPattern.test(email.value)) {
+        document.getElementById('emailError').classList.remove('hidden');
+        isValid = false;
+    }
+    
+    // Validate message
+    const message = document.getElementById('message');
+    if (!message.value || message.value.length < 10) {
+        document.getElementById('messageError').classList.remove('hidden');
+        isValid = false;
+    }
+    
+    // If form is valid, submit it
+    if (isValid) {
+        submitForm();
+    }
+    
+    return false;
+}
+
 async function submitForm() {
     const form = document.getElementById('contactForm');
     const submitStatus = document.getElementById('submitStatus');
@@ -472,8 +597,6 @@ async function submitForm() {
             message: formData.get('message')
         };
 
-        console.log('Sending data:', data);
-
         const response = await fetch(API_ENDPOINT, {
             method: 'POST',
             headers: {
@@ -484,15 +607,12 @@ async function submitForm() {
             body: JSON.stringify(data)
         });
 
-        console.log('Response:', response);
-
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
 
         const result = await response.json();
-        console.log('Result:', result);
-
+        
         // Show success message
         loadingEl.classList.add('hidden');
         successEl.classList.remove('hidden');
@@ -511,6 +631,37 @@ async function submitForm() {
         setTimeout(() => {
             submitStatus.classList.add('hidden');
         }, 3000);
+    }
+}
+
+async function askAgent(event) {
+    event.preventDefault();
+    const question = document.getElementById('questionInput').value;
+    const responseDiv = document.getElementById('aiResponse');
+    const responseText = document.getElementById('responseText');
+
+    responseDiv.classList.add('hidden'); // Hide previous response
+
+    try {
+        const response = await fetch('/api/ask-agent', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ question }),
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        responseText.textContent = data.response; // Display AI response
+        responseDiv.classList.remove('hidden'); // Show response div
+    } catch (error) {
+        console.error('Error:', error);
+        responseText.textContent = 'There was an error processing your request.';
+        responseDiv.classList.remove('hidden'); // Show error message
     }
 }
 </script>

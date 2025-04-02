@@ -1408,3 +1408,31 @@ video {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 } 
+
+/* Add this to your CSS file */
+.about-section {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6)), url('path/to/your/background-image.jpg'); /* Adjust the image path */
+  color: #ffffff; /* Set text color to white for contrast */
+  padding: 50px 20px; /* Add padding for spacing */
+  font-family: 'YourFontFamily', sans-serif; /* Replace with your actual font family */
+}
+
+.about-section h1, .about-section h2 {
+  font-family: 'YourFontFamily', sans-serif; /* Ensure headings use the same font */
+}
+
+.stats {
+  display: flex; /* Use flexbox for layout */
+  justify-content: space-around; /* Space out the stats evenly */
+  margin-top: 20px; /* Add margin for spacing */
+}
+
+.stat {
+  text-align: center; /* Center the text in each stat box */
+  margin: 0 10px; /* Add margin for spacing */
+}
+
+.number {
+  font-size: 2.5em; /* Adjust font size for numbers */
+  font-weight: bold; /* Make numbers bold */
+}

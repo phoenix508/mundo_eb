@@ -7,6 +7,16 @@
     <link href="/css/style.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NLHEPXB1PX"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-NLHEPXB1PX');
+    </script>
+
     <!-- Google Ads -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8285460133715930"
      crossorigin="anonymous"></script>
@@ -79,19 +89,19 @@
 
         /* Background images for destination cards */
         .bg-beijing {
-            background-image: url('https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=800');
+            background-image: url('https://cdn.pixabay.com/photo/2022/08/06/02/24/temple-of-heaven-7367827_960_720.jpg');
         }
 
         .bg-paris {
             background-image: url('https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=800');
         }
 
-        .bg-tokyo {
-            background-image: url('https://cdn.pixabay.com/photo/2020/01/31/07/23/tokyo-4807294_960_720.jpg');
+        .bg-kyoto {
+            background-image: url('https://cdn.pixabay.com/photo/2016/11/29/12/12/architecture-1869398_960_720.jpg');
         }
 
         .bg-newyork {
-            background-image: url('https://media.nomadicmatt.com/2022/newnycguidemain.jpeg');
+            background-image: url('https://cdn.pixabay.com/photo/2014/02/17/10/20/statue-of-liberty-267949_960_720.jpg');
         }
 
         .bg-venice {
@@ -99,7 +109,7 @@
         }
 
         .bg-mexicocity {
-            background-image: url('https://images.unsplash.com/photo-1585464231875-d9ef1f5ad396?w=800');
+            background-image: url('https://cdn.pixabay.com/photo/2022/10/08/18/02/mexico-city-7507531_960_720.jpg');
         }
 
         /* Animated background styles */
@@ -257,16 +267,67 @@
                 <a href="/" class="text-3xl md:text-4xl font-bold">
                     <span class="text-blue-400">The</span><span class="text-white">Mundo</span><span class="text-blue-400">Travel</span>
                 </a>
-                <div class="hidden md:flex space-x-8">
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-white focus:outline-none p-2" aria-label="Toggle menu">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="hidden md:flex space-x-10">
                     <a href="/" class="text-white hover:text-blue-400 transition-colors">Home</a>
+                    <a href="/about" class="text-white hover:text-blue-400 transition-colors">About</a>
                     <a href="/#destinations" class="text-white hover:text-blue-400 transition-colors">Destinations</a>
                     <a href="/gallery" class="text-white hover:text-blue-400 transition-colors">Gallery</a>
                     <a href="/travel-tips" class="text-white hover:text-blue-400 transition-colors">Travel Tips</a>
+                    <a href="/hotel-reviews" class="text-white hover:text-blue-400 transition-colors">Hotel Reviews</a>
                     <a href="/#contact" class="text-white hover:text-blue-400 transition-colors">Contact</a>
                 </div>
             </div>
         </div>
+        <div id="mobile-menu" class="md:hidden hidden bg-black/95 backdrop-blur-md absolute w-full left-0 top-full border-t border-gray-800">
+            <div class="px-6 py-4 space-y-3">
+                <a href="/" class="block text-white hover:text-blue-400 transition-colors py-3 px-4 rounded-lg hover:bg-white/10">Home</a>
+                <a href="/about" class="block text-white hover:text-blue-400 transition-colors py-3 px-4 rounded-lg hover:bg-white/10">About</a>
+                <a href="/#destinations" class="block text-white hover:text-blue-400 transition-colors py-3 px-4 rounded-lg hover:bg-white/10">Destinations</a>
+                <a href="/gallery" class="block text-white hover:text-blue-400 transition-colors py-3 px-4 rounded-lg hover:bg-white/10">Gallery</a>
+                <a href="/travel-tips" class="block text-white hover:text-blue-400 transition-colors py-3 px-4 rounded-lg hover:bg-white/10">Travel Tips</a>
+                <a href="/hotel-reviews" class="block text-white hover:text-blue-400 transition-colors py-3 px-4 rounded-lg hover:bg-white/10">Hotel Reviews</a>
+                <a href="/#contact" class="block text-white hover:text-blue-400 transition-colors py-3 px-4 rounded-lg hover:bg-white/10">Contact</a>
+            </div>
+        </div>
     </nav>
+    <script>
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const body = document.body;
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            body.style.overflow = mobileMenu.classList.contains('hidden') ? '' : 'hidden';
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target) && !mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.add('hidden');
+                body.style.overflow = '';
+            }
+        });
+
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                body.style.overflow = '';
+            });
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768) {
+                mobileMenu.classList.add('hidden');
+                body.style.overflow = '';
+            }
+        });
+    </script>
 
     <!-- Main Content -->
     <main class="flex-grow">

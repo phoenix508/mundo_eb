@@ -33,6 +33,10 @@
         <div class="mesh-gradient"></div>
     </div>
 
+    <section class="py-20 relative">
+
+
+    </section>
     <!-- Featured Destinations -->
     <section class="py-20 relative">
         <div class="container mx-auto px-6">
@@ -47,9 +51,9 @@
                     <div class="card-zoom-image bg-paris"></div>
                     <h3 class="card-zoom-text">Paris</h3>
                 </div>
-                <div class="card-zoom cursor-pointer" onclick="showTravelTips('tokyo')">
-                    <div class="card-zoom-image bg-tokyo"></div>
-                    <h3 class="card-zoom-text">Tokyo</h3>
+                <div class="card-zoom cursor-pointer" onclick="showTravelTips('kyoto')">
+                    <div class="card-zoom-image bg-kyoto"></div>
+                    <h3 class="card-zoom-text">Kyoto</h3>
                 </div>
                 <div class="card-zoom cursor-pointer" onclick="showTravelTips('newyork')">
                     <div class="card-zoom-image bg-newyork"></div>
@@ -70,7 +74,7 @@
     <!-- Search Section -->
     <section id="destinations" class="py-20 relative">
         <div class="container mx-auto px-6">
-            <div class="max-w-3xl mx-auto">
+            <div class="max-w-6xl mx-auto">
                 <h2 class="text-4xl font-bold text-center mb-12 text-white">Find Your Perfect Destination</h2>
                 <div class="bg-white/10 backdrop-blur-md rounded-lg p-6">
                     <div class="flex gap-4">
@@ -147,19 +151,6 @@
                             >
                             <p id="emailError" class="text-red-400 text-sm mt-1 hidden">Please enter a valid email address</p>
                         </div>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium mb-2">Message <span class="text-red-500">*</span></label>
-                        <textarea 
-                            name="message" 
-                            id="message"
-                            rows="5" 
-                            class="w-full px-4 py-3 rounded-lg bg-white/20 backdrop-blur-md border border-white/30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            placeholder="Enter your message here..."
-                            required
-                            minlength="10"
-                        ></textarea>
-                        <p id="messageError" class="text-red-400 text-sm mt-1 hidden">Please enter a message (minimum 10 characters)</p>
                     </div>
                     <div id="submitStatus" class="text-center mt-4 hidden">
                         <div class="loading">
@@ -258,7 +249,7 @@ const cityData = {
     kyoto: {
         title: 'Kyoto, Japan',
         titleColor: 'text-pink-400', // Cherry blossom pink
-        image: 'https://cdn.pixabay.com/photo/2020/01/31/07/23/tokyo-4807294_960_720.jpg',
+        image: 'https://cdn.pixabay.com/photo/2020/08/10/01/29/temple-5476742_960_720.jpg',
         bestTime: 'March to May and September to November',
         tips: [
             'Learn basic Japanese phrases',
@@ -267,10 +258,10 @@ const cityData = {
             'Try local street food'
         ],
         places: [
-            'Shibuya Crossing',
-            'Senso-ji Temple',
-            'Akihabara Electronics District',
-            'Ghibli Museum'
+            'Arashiyama Bamboo Grove',
+            'Fushimi Inari Shrine',
+            'Kinkaku-ji (Golden Pavilion)',
+            'Nijo Castle'
         ],
         youtubeUrl: 'https://www.youtube.com/watch?v=AcFxm07UPf4&list=PLgVLLECE4-Yh-9_WItNDBPJui6QZsBHrb&index=14'
     },
@@ -296,7 +287,7 @@ const cityData = {
     venice: {
         title: 'Venice, Italy',
         titleColor: 'text-blue-600', // Changed to blue for better modal contrast
-        image: 'https://images.unsplash.com/photo-1534113414509-0eec2bfb493f?w=800', // Woman walking dog in St. Mark's Square
+        image: 'https://cdn.pixabay.com/photo/2016/11/10/16/07/carnival-of-venice-1814573_960_720.jpg',
         bestTime: 'April to October',
         tips: [
             'Learn basic Italian phrases',
@@ -315,7 +306,7 @@ const cityData = {
     mexicocity: {
         title: 'Mexico City, Mexico',
         titleColor: 'text-green-500', // Mexican green
-        image: 'https://images.unsplash.com/photo-1585464231875-d9ef1f5ad396?w=800',
+        image: 'https://cdn.pixabay.com/photo/2021/10/26/18/03/exhibition-6744799_960_720.jpg',
         bestTime: 'November to April',
         tips: [
             'Learn basic Spanish phrases',
@@ -507,11 +498,7 @@ function createIntelligentSummary(content) {
     
     // Get key information
     const keyInfo = {
-        mainDesc: paragraphs[0].split('.')[0] + '.',  // First sentence of first paragraph
-        location: content.match(/located (?:in|at) [^.]+\./i)?.[0] || '',
-        population: content.match(/population (?:of |is )?[\d,.]+ (?:million people|\(\d{4}\))/i)?.[0] || '',
-        founded: content.match(/(?:founded|established|built) in \d+/i)?.[0] || '',
-        capital: content.match(/capital (?:city )?of [^.]+\./i)?.[0] || ''
+        mainDesc: paragraphs[0].split('.')[0] + '. ' + paragraphs[0].split('.')[1] + '.',  // First sentence of first paragraph
     };
 
     // Combine relevant information

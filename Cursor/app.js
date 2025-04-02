@@ -4,20 +4,24 @@ const nodemailer = require('nodemailer');
 const path = require('path');
 const axios = require('axios');
 const { spawn } = require('child_process'); // Import child_process to run Python scripts
+const reviewsRouter = require('./routes/reviews');
 // require('dotenv').config(); // Load environment variables
 
 const app = express();
+
+// View engine setup
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+app.set('layout', 'layout');  // Set default layout
+app.use(expressLayouts);
 
 // Middleware
 app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(expressLayouts);
 
-// View engine
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
-app.set('layout', 'layout');
+// Serve static files from the root directory
+app.use(express.static(path.join(__dirname)));
 
 // Email configuration
 const transporter = nodemailer.createTransport({
@@ -80,6 +84,13 @@ const galleryImages = [
 // Routes
 app.get('/', (req, res) => {
     res.render('index');
+});
+
+app.get('/hotel-reviews', (req, res) => {
+    res.render('hotel-reviews', { 
+        title: 'Hotel Reviews',
+        layout: 'layout'  // Explicitly specify the layout
+    });
 });
 
 app.get('/gallery', (req, res) => {
@@ -174,6 +185,16 @@ app.use((err, req, res, next) => {
         message: 'Something went wrong!'
     });
 });
+
+app.get('/about', (req, res) => {
+    res.render('about', { title: 'About' });
+});
+
+app.get('/services', (req, res) => {
+    res.render('services', { title: 'Services' });
+});
+
+app.use('/api/reviews', reviewsRouter);
 
 // Important: Use port 8081 for Elastic Beanstalk
 const port = process.env.PORT || 8081;

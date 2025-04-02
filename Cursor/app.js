@@ -86,10 +86,9 @@ app.get('/', (req, res) => {
     res.render('index');
 });
 
-app.get('/hotel-reviews', (req, res) => {
-    res.render('hotel-reviews', { 
-        title: 'Hotel Reviews',
-        layout: 'layout'  // Explicitly specify the layout
+app.get('/hotel', (req, res) => {
+    res.render('hotel', { 
+        title: 'Hotel Reviews'
     });
 });
 
@@ -195,6 +194,11 @@ app.get('/services', (req, res) => {
 });
 
 app.use('/api/reviews', reviewsRouter);
+
+// Add this with your other routes
+app.get('/legal', (req, res) => {
+    res.render('legal', { title: 'Privacy Policy & Terms of Use' });
+});
 
 // Important: Use port 8081 for Elastic Beanstalk
 const port = process.env.PORT || 8081;

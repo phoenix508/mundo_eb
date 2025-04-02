@@ -1,5 +1,3 @@
-<%- include('partials/header') %>
-
 <div class="relative bg-gradient-to-b from-black via-blue-900 to-black min-h-screen">
     <!-- Animated mesh gradient background -->
     <div class="absolute inset-0 opacity-30 mix-blend-overlay">
@@ -79,10 +77,10 @@
                 </div>
             </div>
             <div class="flex space-x-2">
-                <button class="helpful-btn px-3 py-1 border rounded hover:bg-gray-100">
+                <button class="helpful-btn px-3 py-1 border rounded bg-blue-500 hover:bg-blue-600 text-white" data-helpful="false">
                     <span class="helpful-count">0</span> Helpful
                 </button>
-                <button class="report-btn text-red-600 hover:text-red-700">
+                <button class="report-btn text-red-600 hover:text-red-700" data-review-id="">
                     Report
                 </button>
             </div>
@@ -96,7 +94,48 @@
     </article>
 </template>
 
-<!-- Add this before closing body tag -->
+<!-- Report Modal -->
+<div id="reportModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+    <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+        <h3 class="text-xl font-semibold text-black mb-4">Report Review</h3>
+        <form id="reportForm" class="space-y-4">
+            <input type="hidden" id="reportReviewId" value="">
+            <div class="space-y-2">
+                <label class="flex items-center text-black">
+                    <input type="radio" name="reportReason" value="inappropriate" class="mr-2">
+                    Inappropriate Content
+                </label>
+                <label class="flex items-center text-black">
+                    <input type="radio" name="reportReason" value="spam" class="mr-2">
+                    Spam or Advertising
+                </label>
+                <label class="flex items-center text-black">
+                    <input type="radio" name="reportReason" value="fake" class="mr-2">
+                    Fake Review
+                </label>
+                <label class="flex items-center text-black">
+                    <input type="radio" name="reportReason" value="other" class="mr-2">
+                    Other
+                </label>
+            </div>
+            <textarea 
+                id="reportDescription" 
+                class="w-full p-2 border text-black rounded mt-4" 
+                placeholder="Additional details (optional)"
+                rows="3"
+            ></textarea>
+            <div class="flex justify-end space-x-3">
+                <button type="button" id="cancelReport" class="px-4 py-2 border text-black rounded hover:bg-gray-100">
+                    Cancel
+                </button>
+                <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
+                    Submit Report
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
 <script>
 // Dummy data for testing
 const dummyReviews = [
@@ -181,6 +220,14 @@ function loadReviews() {
         reviewElement.querySelector('.review-location').textContent = review.location;
         reviewElement.querySelector('.helpful-count').textContent = review.helpfulCount;
 
+        // Add event listeners for helpful and report buttons
+        const helpfulBtn = reviewElement.querySelector('.helpful-btn');
+        const reportBtn = reviewElement.querySelector('.report-btn');
+        
+        helpfulBtn.addEventListener('click', () => handleHelpfulClick(helpfulBtn));
+        reportBtn.dataset.reviewId = review.id;
+        reportBtn.addEventListener('click', () => showReportModal(review.id));
+
         container.appendChild(reviewElement);
     });
 }
@@ -203,6 +250,59 @@ document.getElementById('sortReviews').addEventListener('change', (e) => {
 
 // Initialize reviews on page load
 loadReviews();
+
+// Helpful button functionality
+function handleHelpfulClick(button) {
+    const countElement = button.querySelector('.helpful-count');
+    const isHelpful = button.dataset.helpful === 'true';
+    
+    if (!isHelpful) {
+        const currentCount = parseInt(countElement.textContent);
+        countElement.textContent = currentCount + 1;
+        button.dataset.helpful = 'true';
+        button.classList.add('bg-green-500');
+        button.classList.remove('bg-blue-500');
+    }
+}
+
+// Report modal functionality
+const reportModal = document.getElementById('reportModal');
+const reportForm = document.getElementById('reportForm');
+const cancelReport = document.getElementById('cancelReport');
+
+function showReportModal(reviewId) {
+    document.getElementById('reportReviewId').value = reviewId;
+    reportModal.classList.remove('hidden');
+    reportModal.classList.add('flex');
+}
+
+function hideReportModal() {
+    reportModal.classList.add('hidden');
+    reportModal.classList.remove('flex');
+    reportForm.reset();
+}
+
+// Event listeners for report modal
+cancelReport.addEventListener('click', hideReportModal);
+reportModal.addEventListener('click', (e) => {
+    if (e.target === reportModal) hideReportModal();
+});
+
+reportForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const reviewId = document.getElementById('reportReviewId').value;
+    const reason = document.querySelector('input[name="reportReason"]:checked')?.value;
+    const description = document.getElementById('reportDescription').value;
+    
+    try {
+        // This would be an API call in production
+        // await submitReport({ reviewId, reason, description });
+        alert('Thank you for your report. We will review it shortly.');
+        hideReportModal();
+    } catch (error) {
+        alert('Error submitting report. Please try again.');
+    }
+});
 </script>
 
 <style>
@@ -252,6 +352,14 @@ loadReviews();
 
 .helpful-btn:hover {
     background-color: #f3f4f6;
+}
+
+.helpful-btn[data-helpful="true"] {
+    cursor: default;
+}
+
+#reportModal {
+    transition: opacity 0.2s ease-in-out;
 }
 </style>
 

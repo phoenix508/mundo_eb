@@ -152,6 +152,16 @@
                             <p id="emailError" class="text-red-400 text-sm mt-1 hidden">Please enter a valid email address</p>
                         </div>
                     </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Message (Optional)</label>
+                         <textarea 
+                                name="message" 
+                                id="message"
+                                rows="5" 
+                                class="w-full px-4 py-3 rounded-lg bg-white/20 backdrop-blur-md border border-white/30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                placeholder="Enter your message here..."
+                         ></textarea>
+                    </div>
                     <div id="submitStatus" class="text-center mt-4 hidden">
                         <div class="loading">
                             <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-white mx-auto"></div>
@@ -452,6 +462,7 @@ function findBestMatch(searchTerm, results) {
     
     // Define a mapping for fuzzy matches
     const fuzzyMatches = {
+        'beijing': 'Beijing',
         'sf': 'San Francisco',
         'la': 'Los Angeles',
         'ny': 'New York City',
@@ -545,13 +556,6 @@ function validateForm(event) {
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!email.value || !emailPattern.test(email.value)) {
         document.getElementById('emailError').classList.remove('hidden');
-        isValid = false;
-    }
-    
-    // Validate message
-    const message = document.getElementById('message');
-    if (!message.value || message.value.length < 10) {
-        document.getElementById('messageError').classList.remove('hidden');
         isValid = false;
     }
     
@@ -659,8 +663,8 @@ async function askAgent(event) {
 <meta name="author" content="TheMundoTravel">
 <meta property="og:title" content="TheMundoTravel - Explore The World">
 <meta property="og:description" content="Discover amazing destinations and create unforgettable memories">
-<meta property="og:image" content="[Your Logo URL]">
-<meta property="og:url" content="[Your Website URL]">
+<meta property="og:image" content="https://cdn.pixabay.com/photo/2017/10/29/10/55/big-ben-2899429_960_720.jpg">
+<meta property="og:url" content="https://www.themundotravel.com">
 
 <!-- Security Headers -->
 <meta http-equiv="X-Frame-Options" content="DENY">

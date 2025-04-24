@@ -102,7 +102,7 @@ app.get('/gallery', (req, res) => {
 // Proxy route for Google Places API
 app.get('/api/places/:city', async (req, res) => {
     const city = req.params.city;
-    const apiKey = 'AIzaSyA_RHlkMVPbpffnytQyC4kus1ASlbHCxt4';
+    const apiKey = process.env.MAPS_API_KEY;
 
     try {
         const response = await axios.get(`https://maps.googleapis.com/maps/api/place/textsearch/json`, {

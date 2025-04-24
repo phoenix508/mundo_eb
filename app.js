@@ -5,7 +5,7 @@ const path = require('path');
 const axios = require('axios');
 const { spawn } = require('child_process'); // Import child_process to run Python scripts
 const reviewsRouter = require('./routes/reviews');
-// require('dotenv').config(); // Load environment variables
+require('dotenv').config(); // Load environment variables
 
 const app = express();
 
@@ -22,6 +22,54 @@ app.use(express.urlencoded({ extended: true }));
 
 // Serve static files from the root directory
 app.use(express.static(path.join(__dirname)));
+
+// Basic rate limiting without external package
+const aiAgentRateLimit = {
+  windowMs: 15 * 60 * 1000, // 15 minute window
+  max: 10, // limit each IP to 10 requests per windowMs
+  clients: new Map(),
+  
+  middleware: function(req, res, next) {
+    const ip = req.ip || req.connection.remoteAddress;
+    const now = Date.now();
+    
+    if (!this.clients.has(ip)) {
+      this.clients.set(ip, { count: 1, resetTime: now + this.windowMs });
+      return next();
+    }
+    
+    const client = this.clients.get(ip);
+    
+    // Reset if window has passed
+    if (now > client.resetTime) {
+      client.count = 1;
+      client.resetTime = now + this.windowMs;
+      return next();
+    }
+    
+    // Check if rate limit exceeded
+    if (client.count >= this.max) {
+      return res.status(429).json({ 
+        error: 'Too many requests, please try again later.',
+        retryAfter: Math.ceil((client.resetTime - now) / 1000)
+      });
+    }
+    
+    // Increment count and continue
+    client.count++;
+    next();
+  }
+};
+
+// Cleanup old entries periodically
+setInterval(() => {
+  const now = Date.now();
+  for (const [ip, client] of aiAgentRateLimit.clients.entries()) {
+    if (now > client.resetTime) {
+      aiAgentRateLimit.clients.delete(ip);
+    }
+  }
+}, 60000); // Clean up every minute
 
 // Email configuration
 const transporter = nodemailer.createTransport({
@@ -148,26 +196,54 @@ app.post('/api/contact', async (req, res) => {
     }
 });
 
-// New route for AI agent
-app.post('/api/ask-agent', async (req, res) => {
+// New route for AI agent with rate limiting
+app.post('/api/ask-agent', (req, res, next) => {
+  aiAgentRateLimit.middleware(req, res, next);
+}, async (req, res) => {
     const { question } = req.body;
     console.log('Received question:', question); // Debugging line
 
-    // Call the Python script
+    // Add a timeout to kill the process after 5 seconds
     const pythonProcess = spawn('python', ['util.py', question]);
+    let isResponded = false;
+    
+    const timeout = setTimeout(() => {
+      if (!isResponded) {
+        pythonProcess.kill();
+        isResponded = true;
+        res.status(504).json({ error: 'AI agent request timed out' });
+      }
+    }, 5000);
 
     pythonProcess.stdout.on('data', (data) => {
-        console.log('Data from Python script:', data.toString()); // Log the output
+      if (!isResponded) {
+        clearTimeout(timeout);
+        isResponded = true;
+        console.log('Data from Python script:', data.toString());
         res.json({ response: data.toString() });
+      }
     });
 
     pythonProcess.stderr.on('data', (data) => {
+      if (!isResponded) {
+        clearTimeout(timeout);
+        isResponded = true;
         console.error(`stderr: ${data}`);
         res.status(500).json({ error: 'Error communicating with AI agent' });
+      }
     });
 
     pythonProcess.on('close', (code) => {
-        console.log(`Python process exited with code ${code}`); // Debugging line
+      clearTimeout(timeout);
+      if (!isResponded) {
+        isResponded = true;
+        if (code !== 0) {
+          res.status(500).json({ error: 'AI agent process failed' });
+        } else {
+          res.json({ response: 'No response from AI agent' });
+        }
+      }
+      console.log(`Python process exited with code ${code}`);
     });
 });
 

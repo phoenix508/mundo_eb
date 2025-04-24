@@ -1,0 +1,674 @@
+<!-- Hero Section with new dynamic background -->
+<section id="home" class="h-screen flex items-center justify-center relative overflow-hidden">
+    <!-- Background image -->
+    <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://cdn.pixabay.com/photo/2019/07/21/07/12/new-york-4352072_960_720.jpg');"></div>
+    
+    <!-- Overlay for better text visibility -->
+    <div class="absolute inset-0 bg-black/50 backdrop-blur-sm z-10"></div>
+    
+    <!-- Main content -->
+    <div class="container mx-auto px-6 relative z-20 text-center">
+        <h1 class="text-5xl md:text-7xl font-bold mb-6 text-white animate-fade-in">Explore The World</h1>
+        <p class="text-xl md:text-2xl mb-8 text-gray-200 animate-fade-in-delay">Discover amazing destinations and create unforgettable memories</p>
+        <div class="flex justify-center gap-4 animate-fade-in-delay-2">
+            <a href="#destinations" class="bg-blue-600/80 hover:bg-blue-700 text-white px-8 py-3 rounded-full text-lg font-semibold transition-all hover:scale-105 backdrop-blur-sm">
+                Start Exploring
+            </a>
+            <a href="https://www.youtube.com/@themundotravel?sub_confirmation=1" target="_blank" 
+               class="bg-red-600/80 hover:bg-red-700 text-white px-8 py-3 rounded-full text-lg font-semibold transition-all hover:scale-105 backdrop-blur-sm flex items-center gap-2">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/>
+                    <path fill="white" d="M9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+                Subscribe
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Rest of the page with new background -->
+<div class="relative bg-gradient-to-b from-black via-blue-900 to-black min-h-screen">
+    <!-- Animated mesh gradient background -->
+    <div class="absolute inset-0 opacity-30 mix-blend-overlay">
+        <div class="mesh-gradient"></div>
+    </div>
+
+    <section class="py-20 relative">
+
+
+    </section>
+    <!-- Featured Destinations -->
+    <section class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12 text-white">Explore The World With Us</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Destination Cards with Hover Effect -->
+                <div class="card-zoom cursor-pointer" onclick="showTravelTips('beijing')">
+                    <div class="card-zoom-image bg-beijing"></div>
+                    <h3 class="card-zoom-text">Beijing</h3>
+                </div>
+                <div class="card-zoom cursor-pointer" onclick="showTravelTips('paris')">
+                    <div class="card-zoom-image bg-paris"></div>
+                    <h3 class="card-zoom-text">Paris</h3>
+                </div>
+                <div class="card-zoom cursor-pointer" onclick="showTravelTips('kyoto')">
+                    <div class="card-zoom-image bg-kyoto"></div>
+                    <h3 class="card-zoom-text">Kyoto</h3>
+                </div>
+                <div class="card-zoom cursor-pointer" onclick="showTravelTips('newyork')">
+                    <div class="card-zoom-image bg-newyork"></div>
+                    <h3 class="card-zoom-text">New York</h3>
+                </div>
+                <div class="card-zoom cursor-pointer" onclick="showTravelTips('venice')">
+                    <div class="card-zoom-image bg-venice"></div>
+                    <h3 class="card-zoom-text">Venice</h3>
+                </div>
+                <div class="card-zoom cursor-pointer" onclick="showTravelTips('mexicocity')">
+                    <div class="card-zoom-image bg-mexicocity"></div>
+                    <h3 class="card-zoom-text">Mexico City</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <section id="destinations" class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-4xl font-bold text-center mb-12 text-white">Find Your Perfect Destination</h2>
+                <div class="bg-white/10 backdrop-blur-md rounded-lg p-6">
+                    <div class="flex gap-4">
+                        <input 
+                            type="text" 
+                            id="searchInput"
+                            class="flex-1 px-4 py-3 rounded-lg bg-gradient-to-br from-grey/10 to-grey/20 backdrop-blur-md border border-white/30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            placeholder="Search destinations..."
+                        >
+                        <button 
+                            onclick="searchWikipedia()"
+                            class="bg-blue-600 hover:bg-blue-700 px-8 py-3 rounded-lg font-semibold transition-colors"
+                        >
+                            Search
+                        </button>
+                    </div>
+                    <div id="searchResults" class="mt-6"></div>
+                    <div class="mt-8 text-center">
+                        <h3 class="text-xl font-semibold mb-4">Popular Destinations</h3>
+                        <div class="flex flex-wrap justify-center gap-4">
+                            <a href="https://www.youtube.com/watch?v=16Ptw9H7ge4&list=PLgVLLECE4-YisHxgfX8giBPrjwZmoop5v&index=37" target="_blank" 
+                               class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors">
+                                Paris
+                            </a>
+                            <a href="https://www.youtube.com/watch?v=O5uiHoqIO0A&list=PLgVLLECE4-YjLc4_e-KPwDxCOdnmk6v26&index=3" target="_blank" 
+                               class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors">
+                                New York
+                            </a>
+                            <a href="https://www.youtube.com/watch?v=TiIcBTghoro&list=PLgVLLECE4-YjLc4_e-KPwDxCOdnmk6v26&index=8" target="_blank" 
+                               class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors">
+                                Shanghai
+                            </a>
+                            <a href="https://www.youtube.com/watch?v=cACm6guqz9s&list=PLgVLLECE4-Yh-9_WItNDBPJui6QZsBHrb&index=8" target="_blank" 
+                               class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors">
+                                Chongqing
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-4xl font-bold text-center mb-12">Get in Touch</h2>
+                <form id="contactForm" class="space-y-6" onsubmit="return validateForm(event)">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Name <span class="text-red-500">*</span></label>
+                            <input 
+                                type="text" 
+                                name="name" 
+                                id="name"
+                                class="w-full px-4 py-3 rounded-lg bg-white/20 backdrop-blur-md border border-white/30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                placeholder="Enter your name"
+                                required
+                                minlength="2"
+                            >
+                            <p id="nameError" class="text-red-400 text-sm mt-1 hidden">Please enter your name (minimum 2 characters)</p>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Email <span class="text-red-500">*</span></label>
+                            <input 
+                                type="email" 
+                                name="email" 
+                                id="email"
+                                class="w-full px-4 py-3 rounded-lg bg-white/20 backdrop-blur-md border border-white/30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                placeholder="your@email.com"
+                                required
+                                pattern="[a-z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,}$"
+                            >
+                            <p id="emailError" class="text-red-400 text-sm mt-1 hidden">Please enter a valid email address</p>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Message (Optional)</label>
+                         <textarea 
+                                name="message" 
+                                id="message"
+                                rows="5" 
+                                class="w-full px-4 py-3 rounded-lg bg-white/20 backdrop-blur-md border border-white/30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                placeholder="Enter your message here..."
+                         ></textarea>
+                    </div>
+                    <div id="submitStatus" class="text-center mt-4 hidden">
+                        <div class="loading">
+                            <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-white mx-auto"></div>
+                            <p class="text-white mt-2">Sending message...</p>
+                        </div>
+                        <p class="success text-green-400 hidden">Message sent successfully!</p>
+                        <p class="error text-red-400 hidden">Error sending message. Please try again.</p>
+                    </div>
+                    <div class="text-center">
+                        <button 
+                            type="submit"
+                            class="bg-blue-600 hover:bg-blue-700 px-8 py-3 rounded-lg font-semibold transition-colors inline-block"
+                        >
+                            Send Message
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Agent Section -->
+    <section id="ai-agent" class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12 text-white">Ask Our AI Agent</h2>
+            <form id="aiForm" class="space-y-6" onsubmit="return askAgent(event)">
+                <div>
+                    <label class="block text-sm font-medium mb-2">Your Question <span class="text-red-500">*</span></label>
+                    <input 
+                        type="text" 
+                        id="questionInput"
+                        class="w-full px-4 py-3 rounded-lg bg-white/20 backdrop-blur-md border border-white/30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        placeholder="What would you like to know?"
+                        required
+                    >
+                </div>
+                <div id="aiResponse" class="text-center mt-4 hidden">
+                    <p class="text-white">AI Response: <span id="responseText" class="font-bold"></span></p>
+                </div>
+                <div class="text-center">
+                    <button 
+                        type="submit"
+                        class="bg-blue-600 hover:bg-blue-700 px-8 py-3 rounded-lg font-semibold transition-colors inline-block"
+                    >
+                        Ask
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+</div>
+
+<%- include('partials/travel-modal') %>
+
+<script type="text/javascript">
+const cityData = {
+    beijing: {
+        title: 'Beijing, China',
+        titleColor: 'text-red-500', // Traditional Chinese red
+        image: 'https://cdn.pixabay.com/photo/2020/09/17/11/39/path-5578851_960_720.jpg',
+        bestTime: 'September to November (Fall) or March to May (Spring)',
+        tips: [
+            'Learn basic Mandarin phrases',
+            'Download WeChat for local communication',
+            'Get a VPN before arriving',
+            'Use the subway system for transportation'
+        ],
+        places: [
+            'The Great Wall (Mutianyu section)',
+            'Forbidden City',
+            'Temple of Heaven',
+            'Summer Palace'
+        ],
+        youtubeUrl: 'https://www.youtube.com/watch?v=QXQLLA14MF4&list=PLgVLLECE4-Yh-9_WItNDBPJui6QZsBHrb&index=1'
+    },
+    paris: {
+        title: 'Paris, France',
+        titleColor: 'text-blue-500',
+        image: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800',
+        bestTime: 'April to October, especially June and September',
+        tips: [
+            'Learn basic French greetings',
+            'Buy Museum Pass for attractions',
+            'Book Eiffel Tower tickets in advance',
+            'Use the Metro for transportation'
+        ],
+        places: [
+            'Eiffel Tower',
+            'Louvre Museum',
+            'Notre-Dame Cathedral',
+            'Montmartre'
+        ],
+        youtubeUrl: 'https://www.youtube.com/watch?v=KYzuFjq6uaY&list=PLgVLLECE4-YisHxgfX8giBPrjwZmoop5v&index=30'
+    },
+    kyoto: {
+        title: 'Kyoto, Japan',
+        titleColor: 'text-pink-400', // Cherry blossom pink
+        image: 'https://cdn.pixabay.com/photo/2020/08/10/01/29/temple-5476742_960_720.jpg',
+        bestTime: 'March to May and September to November',
+        tips: [
+            'Learn basic Japanese phrases',
+            'Download Google Maps for navigation',
+            'Use QR codes for public transport',
+            'Try local street food'
+        ],
+        places: [
+            'Arashiyama Bamboo Grove',
+            'Fushimi Inari Shrine',
+            'Kinkaku-ji (Golden Pavilion)',
+            'Nijo Castle'
+        ],
+        youtubeUrl: 'https://www.youtube.com/watch?v=AcFxm07UPf4&list=PLgVLLECE4-Yh-9_WItNDBPJui6QZsBHrb&index=14'
+    },
+    newyork: {
+        title: 'New York, USA',
+        titleColor: 'text-yellow-400', // NYC taxi yellow
+        image: 'https://media.nomadicmatt.com/2022/newnycguidemain.jpeg',
+        bestTime: 'April to June and September to November',
+        tips: [
+            'Learn basic English phrases',
+            'Download Google Maps for navigation',
+            'Use Uber for transportation',
+            'Explore the Statue of Liberty'
+        ],
+        places: [
+            'Statue of Liberty',
+            'Central Park',
+            'Times Square',
+            'Empire State Building'
+        ],
+        youtubeUrl: 'https://www.youtube.com/watch?v=O5uiHoqIO0A&list=PLgVLLECE4-YjQTDOlE1KdoLZ8oBRkw0h6&index=15'
+    },
+    venice: {
+        title: 'Venice, Italy',
+        titleColor: 'text-blue-600', // Changed to blue for better modal contrast
+        image: 'https://cdn.pixabay.com/photo/2016/11/10/16/07/carnival-of-venice-1814573_960_720.jpg',
+        bestTime: 'April to October',
+        tips: [
+            'Learn basic Italian phrases',
+            'Use Vaporetti for water transportation',
+            'Explore the Rialto Bridge',
+            'Visit the Peggy Guggenheim Collection'
+        ],
+        places: [
+            'St. Mark\'s Square',
+            'Rialto Bridge',
+            'Doge\'s Palace',
+            'Murano Island'
+        ],
+        youtubeUrl: 'https://www.youtube.com/watch?v=KYzuFjq6uaY&list=PLgVLLECE4-YisHxgfX8giBPrjwZmoop5v&index=30'
+    },
+    mexicocity: {
+        title: 'Mexico City, Mexico',
+        titleColor: 'text-green-500', // Mexican green
+        image: 'https://cdn.pixabay.com/photo/2021/10/26/18/03/exhibition-6744799_960_720.jpg',
+        bestTime: 'November to April',
+        tips: [
+            'Learn basic Spanish phrases',
+            'Download Google Maps for navigation',
+            'Use Uber for transportation',
+            'Explore the Templo Mayor'
+        ],
+        places: [
+            'Templo Mayor',
+            'Zocalo',
+            'Teatro de la Ciudad',
+            'Palacio de Bellas Artes'
+        ],
+        youtubeUrl: 'https://www.youtube.com/watch?v=xkXr3HrcT1c&list=PLgVLLECE4-YiunXm_bzNuKB8tm-38DyeQ&index=3'
+    }
+};
+
+function showTravelTips(city) {
+    const data = cityData[city];
+    const modalTitle = document.getElementById('modalTitle');
+    
+    // Set title with color
+    modalTitle.textContent = data.title;
+    modalTitle.className = `text-3xl font-bold mb-4 ${data.titleColor}`;
+    
+    document.getElementById('modalImage').src = data.image;
+    document.getElementById('modalBestTime').textContent = data.bestTime;
+    
+    const tipsHtml = data.tips.map(tip => `<li>${tip}</li>`).join('');
+    document.getElementById('modalTips').innerHTML = tipsHtml;
+    
+    const placesHtml = data.places.map(place => `<li>${place}</li>`).join('');
+    document.getElementById('modalPlaces').innerHTML = placesHtml;
+    
+    // Update YouTube link
+    const youtubeLink = document.getElementById('modalYoutubeLink');
+    if (data.youtubeUrl) {
+        youtubeLink.href = data.youtubeUrl;
+        youtubeLink.parentElement.classList.remove('hidden');
+    } else {
+        youtubeLink.parentElement.classList.add('hidden');
+    }
+    
+    document.getElementById('travelModal').classList.remove('hidden');
+}
+
+function closeModal() {
+    document.getElementById('travelModal').classList.add('hidden');
+}
+
+// Close modal when clicking outside
+document.getElementById('travelModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        closeModal();
+    }
+});
+
+// Close modal with ESC key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeModal();
+    }
+});
+
+async function searchWikipedia() {
+    const searchTerm = document.getElementById('searchInput').value.trim();
+    const resultsDiv = document.getElementById('searchResults');
+    resultsDiv.innerHTML = '<div class="text-center text-white">Searching...</div>';
+
+    try {
+        // First, try to find the most relevant page using search
+        const searchResponse = await fetch(`https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(searchTerm)}&format=json&origin=*&srlimit=5`);
+        const searchData = await searchResponse.json();
+
+        if (!searchData.query.search.length) {
+            resultsDiv.innerHTML = '<div class="text-center text-white">No matches found. Please try a different search term.</div>';
+            return;
+        }
+
+        // Find the most relevant result
+        const bestMatch = findBestMatch(searchTerm, searchData.query.search);
+        const pageTitle = bestMatch.title;
+        const pageId = bestMatch.pageid;
+
+        // Get the main image
+        const imageResponse = await fetch(`https://en.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&piprop=original&pageids=${pageId}&origin=*`);
+        const imageData = await imageResponse.json();
+        const imageUrl = imageData.query.pages[pageId]?.original?.source || null;
+
+        // Get the full content
+        const fullContentResponse = await fetch(`https://en.wikipedia.org/w/api.php?action=query&pageids=${pageId}&format=json&origin=*&prop=extracts&explaintext=true`);
+        const fullContentData = await fullContentResponse.json();
+        const fullContent = fullContentData.query.pages[pageId].extract;
+
+        // Create the summary
+        const summary = createIntelligentSummary(fullContent);
+
+        // Fetch top attractions from Google Places API
+        const placesResponse = await fetch(`/api/places/${encodeURIComponent(bestMatch.title)}`);
+        const attractions = await placesResponse.json();
+
+        // Create the attractions list with a more vibrant layout and a brief introduction
+        const attractionsHtml = attractions.map(attraction => `
+            <li class="mb-4 p-4 bg-blue-800 rounded-lg shadow-lg">
+                <h4 class="font-bold text-yellow-300">${attraction.name}</h4>
+                <p class="text-gray-200 mb-2">Discover the beauty of ${attraction.name}, a must-visit destination known for its stunning sights and rich culture.</p>
+                <span class="text-white">Description: </span>
+                <span class="text-gray-300">${attraction.description}</span>
+            </li>
+        `).join('');
+
+        resultsDiv.innerHTML = `
+            <div class="bg-gradient-to-r from-blue-900 via-blue-700 to-blue-900 backdrop-blur-md rounded-lg p-6 max-w-4xl mx-auto">
+                <h3 class="text-xl font-semibold mb-4 text-white">${pageTitle}</h3>
+                ${imageUrl ? `
+                    <div class="mb-4 rounded-lg overflow-hidden flex justify-center bg-black/30">
+                        <img src="${imageUrl}" alt="${pageTitle}" 
+                             class="max-w-full h-auto max-h-[500px] object-contain"
+                             onclick="window.open(this.src, '_blank')"
+                             style="cursor: zoom-in;">
+                    </div>
+                ` : ''}
+                <p class="text-white mb-6 text-lg leading-relaxed">${summary}</p>
+                <h4 class="text-lg font-semibold text-white">Top Attractions:</h4>
+                <ul class="text-gray-300">${attractionsHtml}</ul>
+                <div class="text-center">
+                    <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(bestMatch.title)}" 
+                       target="_blank"
+                       class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition-colors">
+                        View on Google Maps
+                    </a>
+                </div>
+            </div>`;
+    } catch (error) {
+        resultsDiv.innerHTML = '<div class="text-center text-white">Error fetching results. Please try again.</div>';
+        console.error('Error:', error);
+    }
+}
+
+// Helper function to find the best match from search results
+function findBestMatch(searchTerm, results) {
+    searchTerm = searchTerm.toLowerCase();
+    
+    // Define a mapping for fuzzy matches
+    const fuzzyMatches = {
+        'beijing': 'Beijing',
+        'sf': 'San Francisco',
+        'la': 'Los Angeles',
+        'ny': 'New York City',
+        'nyc': 'New York City',
+        'new york': 'New York City',
+        'mexicocity': 'Mexico City'
+    };
+
+    // Check if the search term matches any fuzzy match
+    if (fuzzyMatches[searchTerm]) {
+        return results.find(result => 
+            removeDiacritics(result.title.toLowerCase()) === removeDiacritics(fuzzyMatches[searchTerm].toLowerCase())
+        );
+    }
+
+    // First, try to find an exact match (ignoring case and diacritics)
+    const exactMatch = results.find(result => 
+        removeDiacritics(result.title.toLowerCase()) === removeDiacritics(searchTerm)
+    );
+    if (exactMatch) return exactMatch;
+
+    // Then, try to find a match that starts with the search term
+    const startsWith = results.find(result => 
+        removeDiacritics(result.title.toLowerCase()).startsWith(removeDiacritics(searchTerm))
+    );
+    if (startsWith) return startsWith;
+
+    // If no better match is found, return the first result (highest relevance score)
+    return results[0];
+}
+
+// Helper function to remove diacritics
+function removeDiacritics(str) {
+    return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+}
+
+// Helper function to create an intelligent summary
+function createIntelligentSummary(content) {
+    // Remove citations
+    content = content.replace(/\[\d+\]/g, '');
+    
+    // Split into paragraphs
+    const paragraphs = content.split('\n\n');
+    
+    // Get key information
+    const keyInfo = {
+        mainDesc: paragraphs[0].split('.')[0] + '. ' + paragraphs[0].split('.')[1] + '.',  // First sentence of first paragraph
+    };
+
+    // Combine relevant information
+    let summary = keyInfo.mainDesc;
+    
+    const additionalInfo = [keyInfo.location, keyInfo.capital, keyInfo.population, keyInfo.founded]
+        .filter(info => info && !summary.includes(info));
+    
+    if (additionalInfo.length > 0) {
+        summary += ' ' + additionalInfo.join(' ');
+    }
+
+    return summary;
+}
+
+// Add event listener for Enter key
+document.getElementById('searchInput').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+        searchWikipedia();
+    }
+});
+
+// Replace this section in your script
+// Remove the process.env reference and use the API endpoint directly
+const API_ENDPOINT = 'https://24pepvwnte.execute-api.us-east-1.amazonaws.com/dev';
+
+function validateForm(event) {
+    event.preventDefault();
+    
+    // Reset error messages
+    document.querySelectorAll('.text-red-400').forEach(el => el.classList.add('hidden'));
+    
+    let isValid = true;
+    
+    // Validate name
+    const name = document.getElementById('name');
+    if (!name.value || name.value.length < 2) {
+        document.getElementById('nameError').classList.remove('hidden');
+        isValid = false;
+    }
+    
+    // Validate email
+    const email = document.getElementById('email');
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!email.value || !emailPattern.test(email.value)) {
+        document.getElementById('emailError').classList.remove('hidden');
+        isValid = false;
+    }
+    
+    // If form is valid, submit it
+    if (isValid) {
+        submitForm();
+    }
+    
+    return false;
+}
+
+async function submitForm() {
+    const form = document.getElementById('contactForm');
+    const submitStatus = document.getElementById('submitStatus');
+    const loadingEl = submitStatus.querySelector('.loading');
+    const successEl = submitStatus.querySelector('.success');
+    const errorEl = submitStatus.querySelector('.error');
+    
+    try {
+        // Show loading state
+        submitStatus.classList.remove('hidden');
+        loadingEl.classList.remove('hidden');
+        successEl.classList.add('hidden');
+        errorEl.classList.add('hidden');
+        
+        const formData = new FormData(form);
+        const data = {
+            name: formData.get('name'),
+            email: formData.get('email'),
+            message: formData.get('message')
+        };
+
+        const response = await fetch(API_ENDPOINT, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            mode: 'cors',
+            body: JSON.stringify(data)
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const result = await response.json();
+        
+        // Show success message
+        loadingEl.classList.add('hidden');
+        successEl.classList.remove('hidden');
+        form.reset();
+        
+        // Hide success message after 3 seconds
+        setTimeout(() => {
+            submitStatus.classList.add('hidden');
+        }, 3000);
+    } catch (error) {
+        console.error('Failed to send message:', error);
+        loadingEl.classList.add('hidden');
+        errorEl.classList.remove('hidden');
+        
+        // Hide error message after 3 seconds
+        setTimeout(() => {
+            submitStatus.classList.add('hidden');
+        }, 3000);
+    }
+}
+
+async function askAgent(event) {
+    event.preventDefault();
+    const question = document.getElementById('questionInput').value;
+    const responseDiv = document.getElementById('aiResponse');
+    const responseText = document.getElementById('responseText');
+
+    responseDiv.classList.add('hidden'); // Hide previous response
+
+    try {
+        const response = await fetch('/api/ask-agent', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ question }),
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        responseText.textContent = data.response; // Display AI response
+        responseDiv.classList.remove('hidden'); // Show response div
+    } catch (error) {
+        console.error('Error:', error);
+        responseText.textContent = 'There was an error processing your request.';
+        responseDiv.classList.remove('hidden'); // Show error message
+    }
+}
+</script>
+
+<!-- Add to your head section -->
+<meta name="description" content="Explore amazing travel destinations worldwide with TheMundoTravel. Find travel tips, guides, and plan your next adventure.">
+<meta name="keywords" content="travel, destinations, tourism, city guides, travel tips">
+<meta name="author" content="TheMundoTravel">
+<meta property="og:title" content="TheMundoTravel - Explore The World">
+<meta property="og:description" content="Discover amazing destinations and create unforgettable memories">
+<meta property="og:image" content="https://cdn.pixabay.com/photo/2017/10/29/10/55/big-ben-2899429_960_720.jpg">
+<meta property="og:url" content="https://www.themundotravel.com">
+
+<!-- Security Headers -->
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+<meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' https: 'unsafe-inline' 'unsafe-eval';"> 

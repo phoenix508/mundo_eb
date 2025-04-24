@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.card-zoom {
+    @apply relative flex items-center justify-center h-[400px] overflow-hidden rounded-2xl;
+}
+
+.card-zoom-image {
+    @apply absolute w-full h-full transition-all duration-500 ease-in-out transform bg-center bg-cover;
+}
+
+.card-zoom:hover .card-zoom-image {
+    @apply scale-110;
+}
+
+.card-zoom-text {
+    @apply absolute text-5xl font-black text-white opacity-0 transition-all duration-500 ease-in-out transform scale-150 z-10;
+}
+
+.card-zoom:hover .card-zoom-text {
+    @apply opacity-100 scale-100;
+}
+
+/* Add an overlay on hover */
+.card-zoom::after {
+    content: '';
+    @apply absolute inset-0 bg-black/0 transition-all duration-500 ease-in-out;
+}
+
+.card-zoom:hover::after {
+    @apply bg-black/40;
+}
+
+/* Update search input text color */
+.search-input {
+    @apply text-gray-800 placeholder-gray-500;
+}
+
+.modal-enter {
+    @apply opacity-0 scale-95;
+}
+
+.modal-enter-active {
+    @apply opacity-100 scale-100;
+    transition: opacity 300ms ease-out, transform 300ms ease-out;
+}
+
+.modal-exit {
+    @apply opacity-100 scale-100;
+}
+
+.modal-exit-active {
+    @apply opacity-0 scale-95;
+    transition: opacity 300ms ease-in, transform 300ms ease-in;
+}
+
+.gallery-item {
+    @apply relative overflow-hidden rounded-2xl transition-transform duration-300 hover:scale-105;
+}
+
+.gallery-overlay {
+    @apply absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 transition-opacity duration-300;
+}
+
+.gallery-item:hover .gallery-overlay {
+    @apply opacity-100;
+} 

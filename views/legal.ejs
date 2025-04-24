@@ -1,0 +1,183 @@
+<!-- Hero Section -->
+<section class="h-[40vh] flex items-center justify-center relative overflow-hidden">
+    <!-- Background image -->
+    <div class="absolute inset-0 bg-cover bg-center" 
+         style="background-image: url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');">
+    </div>
+    
+    <!-- Overlay -->
+    <div class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+    
+    <!-- Content -->
+    <div class="relative z-10 text-center text-white">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">Legal Information</h1>
+        <p class="text-lg md:text-xl">Privacy Policy & Terms of Use</p>
+    </div>
+</section>
+
+<!-- Main Content -->
+<div class="relative bg-gradient-to-b from-black via-blue-900 to-black min-h-screen">
+    <!-- Animated mesh gradient background -->
+    <div class="absolute inset-0 opacity-30 mix-blend-overlay">
+        <div class="mesh-gradient"></div>
+    </div>
+
+    <section class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto space-y-16">
+                <!-- Navigation Tabs -->
+                <div class="flex justify-center space-x-4 mb-8">
+                    <button onclick="showTab('privacy')" 
+                            class="tab-btn active px-6 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-colors"
+                            id="privacyBtn">
+                        Privacy Policy
+                    </button>
+                    <button onclick="showTab('terms')" 
+                            class="tab-btn px-6 py-2 rounded-lg bg-white/10 text-white hover:bg-white/20 transition-colors"
+                            id="termsBtn">
+                        Terms of Use
+                    </button>
+                </div>
+
+                <!-- Privacy Policy Section -->
+                <div id="privacy" class="legal-content bg-white/10 backdrop-blur-md rounded-lg p-8">
+                    <div class="prose prose-lg text-gray-300 max-w-none">
+                        <h2 class="text-3xl font-bold text-white mb-6">Privacy Policy</h2>
+                        <p class="text-blue-300">Effective Date: 2025/02/27</p>
+                        
+                        <p class="mt-4">themundotravel.com ("we," "us," or "our") values your privacy. This Privacy Policy outlines how we collect, use, and protect your personal information.</p>
+                        
+                        <h3 class="text-2xl font-semibold text-white mt-8 mb-4">1. Information We Collect</h3>
+                        <ul class="list-disc pl-6 space-y-2">
+                            <li>Personal Information (e.g., name, email) if voluntarily submitted.</li>
+                            <li>Automatically collected data (e.g., cookies, IP addresses) for analytics.</li>
+                        </ul>
+
+                        <h3 class="text-2xl font-semibold text-white mt-8 mb-4">2. How We Use Your Information</h3>
+                        <ul class="list-disc pl-6 space-y-2">
+                            <li>To provide travel tips and website services.</li>
+                            <li>To send newsletters if you opt-in.</li>
+                            <li>To analyze website traffic and improve content.</li>
+                        </ul>
+
+                        <h3 class="text-2xl font-semibold text-white mt-8 mb-4">3. Third-Party Services</h3>
+                        <ul class="list-disc pl-6 space-y-2">
+                            <li>We may use third-party services (e.g., Google Analytics) that collect data.</li>
+                            <li>External links are not covered by this policy.</li>
+                        </ul>
+
+                        <h3 class="text-2xl font-semibold text-white mt-8 mb-4">4. Your Rights</h3>
+                        <ul class="list-disc pl-6 space-y-2">
+                            <li>You may request access, correction, or deletion of your data.</li>
+                            <li>You can opt out of cookies via browser settings.</li>
+                        </ul>
+
+                        <h3 class="text-2xl font-semibold text-white mt-8 mb-4">5. Government and Legal Requests</h3>
+                        <ul class="list-disc pl-6 space-y-2">
+                            <li>We review all government and legal requests for user data for legal validity.</li>
+                            <li>We may challenge requests we believe are unlawful or overbroad.</li>
+                            <li>We follow data minimization principles, disclosing only what's legally required.</li>
+                            <li>We maintain detailed records of all requests and our responses.</li>
+                        </ul>
+
+                        <h3 class="text-2xl font-semibold text-white mt-8 mb-4">6. Updates to This Policy</h3>
+                        <p>We may update this policy; changes will be posted on this page.</p>
+
+                        <div class="mt-8 p-4 bg-white/5 rounded-lg">
+                            <h4 class="text-xl font-semibold text-white mb-2">Contact Us</h4>
+                            <p>If you have any questions, email us at themundotravel@gmail.com</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Terms of Use Section -->
+                <div id="terms" class="legal-content hidden bg-white/10 backdrop-blur-md rounded-lg p-8">
+                    <div class="prose prose-lg text-gray-300 max-w-none">
+                        <h2 class="text-3xl font-bold text-white mb-6">Terms of Use</h2>
+                        <p class="text-blue-300">Effective Date: 2025/02/27</p>
+                        
+                        <p class="mt-4">By accessing themundotravel.com ("the Website"), you agree to these Terms of Use.</p>
+
+                        <h3 class="text-2xl font-semibold text-white mt-8 mb-4">1. Use of Content</h3>
+                        <ul class="list-disc pl-6 space-y-2">
+                            <li>All travel tips, articles, and videos are for informational purposes only.</li>
+                            <li>You may not copy or distribute content without permission.</li>
+                        </ul>
+
+                        <h3 class="text-2xl font-semibold text-white mt-8 mb-4">2. User Responsibilities</h3>
+                        <ul class="list-disc pl-6 space-y-2">
+                            <li>You must not use the Website for unlawful activities.</li>
+                            <li>You are responsible for ensuring your actions comply with local laws.</li>
+                        </ul>
+
+                        <h3 class="text-2xl font-semibold text-white mt-8 mb-4">3. Disclaimers</h3>
+                        <ul class="list-disc pl-6 space-y-2">
+                            <li>We do not guarantee the accuracy or completeness of content.</li>
+                            <li>We are not liable for any travel decisions based on our content.</li>
+                        </ul>
+
+                        <h3 class="text-2xl font-semibold text-white mt-8 mb-4">4. External Links</h3>
+                        <p>We may link to third-party sites; we are not responsible for their content.</p>
+
+                        <h3 class="text-2xl font-semibold text-white mt-8 mb-4">5. Changes to Terms</h3>
+                        <p>We may modify these terms at any time. Continued use constitutes agreement.</p>
+
+                        <div class="mt-8 p-4 bg-white/5 rounded-lg">
+                            <h4 class="text-xl font-semibold text-white mb-2">Contact Us</h4>
+                            <p>For questions, email us at themundotravel@gmail.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<style>
+.mesh-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(at 40% 20%, rgba(0,0,255,0.3) 0px, transparent 50%),
+        radial-gradient(at 80% 0%, rgba(0,100,255,0.3) 0px, transparent 50%),
+        radial-gradient(at 0% 50%, rgba(0,0,255,0.3) 0px, transparent 50%),
+        radial-gradient(at 80% 50%, rgba(0,100,255,0.3) 0px, transparent 50%),
+        radial-gradient(at 0% 100%, rgba(0,0,255,0.3) 0px, transparent 50%),
+        radial-gradient(at 80% 100%, rgba(0,100,255,0.3) 0px, transparent 50%);
+    animation: meshGradient 15s linear infinite;
+    background-size: 200% 200%;
+}
+
+@keyframes meshGradient {
+    0% { background-position: 0% 0%; }
+    50% { background-position: 100% 100%; }
+    100% { background-position: 0% 0%; }
+}
+</style>
+
+<script>
+function showTab(tabName) {
+    // Hide all content
+    document.querySelectorAll('.legal-content').forEach(content => {
+        content.classList.add('hidden');
+    });
+    
+    // Show selected content
+    document.getElementById(tabName).classList.remove('hidden');
+    
+    // Update button styles
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('bg-blue-600');
+        btn.classList.add('bg-white/10');
+    });
+    
+    const activeBtn = document.getElementById(tabName + 'Btn');
+    activeBtn.classList.remove('bg-white/10');
+    activeBtn.classList.add('bg-blue-600');
+}
+</script>
+
+<%- include('partials/footer') %> 

@@ -1,0 +1,125 @@
+<%- include('partials/header') %> <!-- Include your header -->
+<section id="travel-tips" class="h-screen flex items-center justify-center relative overflow-hidden">
+    <!-- Background image -->
+    <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://cdn.pixabay.com/photo/2018/07/20/14/02/rome-3550739_960_720.jpg');"></div>
+    
+    <!-- Overlay for better text visibility -->
+    <div class="absolute inset-0 bg-black/50 backdrop-blur-sm z-10"></div>
+    
+    <!-- Main content -->
+    <div class="container mx-auto px-6 relative z-20 text-center">
+        <h1 class="text-5xl md:text-7xl font-bold mb-2 text-white animate-fade-in">Travel Tips</h1>
+        <p class="text-xl md:text-2xl mb-4 text-gray-200 animate-fade-in-delay">Have You Double-Checked Your Packing List?</p>
+
+        <section class="py-20 relative">
+            <div class="container mx-auto px-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                    <!-- Destination Cards with OnClick Feature -->
+                    <div class="card-zoom cursor-pointer" onclick="showDetailedTravelTips('documents')">
+                        <img src="https://images.pexels.com/photos/5405598/pexels-photo-5405598.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Travel Documents" class="card-zoom-image">
+                        <h3 class="card-zoom-text text-lg md:text-xl">Travel Documents</h3>
+                    </div>
+                    <div class="card-zoom cursor-pointer" onclick="showDetailedTravelTips('packing')">
+                        <img src="https://cdn.pixabay.com/photo/2017/01/03/20/54/luggage-1950628_960_720.jpg" alt="Baggage & Packing" class="card-zoom-image">
+                        <h3 class="card-zoom-text text-lg md:text-xl">Baggage & Packing</h3>
+                    </div>
+                    <div class="card-zoom cursor-pointer" onclick="showDetailedTravelTips('transportation')">
+                        <img src="https://cdn.pixabay.com/photo/2016/11/23/17/35/metro-1853976_960_720.jpg" alt="Transportation & Timing" class="card-zoom-image">
+                        <h3 class="card-zoom-text text-lg md:text-xl">Transportation</h3>
+                    </div>
+                    <div class="card-zoom cursor-pointer" onclick="showDetailedTravelTips('accommodations')">
+                        <img src="https://cdn.pixabay.com/photo/2017/09/29/16/33/hotel-2799682_960_720.jpg" alt="Accommodations" class="card-zoom-image">
+                        <h3 class="card-zoom-text text-lg md:text-xl">Accommodations</h3>
+                    </div>
+                    <div class="card-zoom cursor-pointer" onclick="showDetailedTravelTips('weather')">
+                        <img src="https://cdn.pixabay.com/photo/2016/11/21/13/54/glass-window-1845534_960_720.jpg" alt="Weather & Conditions" class="card-zoom-image">
+                        <h3 class="card-zoom-text text-lg md:text-xl">Weather & Conditions</h3>
+                    </div>
+                    <div class="card-zoom cursor-pointer" onclick="showDetailedTravelTips('flights')">
+                        <img src="https://cdn.pixabay.com/photo/2017/06/05/11/01/airport-2373727_960_720.jpg" alt="Flight Status" class="card-zoom-image">
+                        <h3 class="card-zoom-text text-lg md:text-xl">Flight Status</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</section>
+
+<!-- Modal Structure -->
+<div id="travelModal" class="hidden fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+    <div class="bg-white rounded-lg p-6 max-w-md w-full">
+        <h2 id="modalTitle" class="text-2xl text-gray-800 font-bold mb-4"></h2>
+        <ul id="modalContent" class="text-gray-600 mb-4 list-disc list-inside">
+        </ul>
+        <button onclick="document.getElementById('travelModal').classList.add('hidden');" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded">Close</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+// New data structure for detailed travel tips
+const travelTipsData = {
+    documents: {
+        title: 'Travel Documents',
+        content: [
+            'Passport & Visa – Ensure they are valid for the required period (some countries require six months of validity).',
+            'Boarding Pass – Check-in online and download or print your boarding pass.',
+            'Flight Confirmation – Double-check the flight number, departure time, and terminal.'
+        ]
+    },
+    packing: {
+        title: 'Baggage & Packing',
+        content: [
+            'Luggage Weight & Size – Ensure checked and carry-on bags comply with airline restrictions.',
+            'Liquids & Prohibited Items – Follow the TSA (or equivalent) rules for carry-on liquids and sharp objects.',
+            'Essential Items in Carry-on – Include travel documents, medications, chargers, and a change of clothes in case of baggage delay.'
+        ]
+    },
+    transportation: {
+        title: 'Transportation & Timing',
+        content: [
+            'Airport Arrival Time – Arrive at least 2 hours before domestic flights and 3 hours before international flights.',
+            'Transportation to the Airport – Confirm Uber, taxi, train, or parking arrangements.'
+        ]
+    },
+    accommodations: {
+        title: 'Accommodations & Itinerary',
+        content: [
+            'Hotel/Airbnb Details – Have the reservation confirmed and address saved.',
+            'Ground Transportation – Check rental car, airport pickup, or local transit options at the destination.'
+        ]
+    },
+    weather: {
+        title: 'Weather & Destination Conditions',
+        content: [
+            'Local Weather – Pack accordingly for the temperature and climate at your destination.',
+            'Currency & Payment – Have some local currency or ensure credit/debit cards work internationally.',
+            'Emergency Contacts – Save embassy, hotel, and emergency numbers.'
+        ]
+    },
+    flights: {
+        title: 'Flight Status & Airline Policies',
+        content: [
+            'Flight Delays or Cancellations – Check real-time updates through the airline’s website or app.',
+            'Layover Details – Know gate locations and transit times for connecting flights.',
+            'Seat Selection & Upgrades – Verify seat assignments or consider last-minute upgrades.'
+        ]
+    }
+};
+
+// New function to show detailed travel tips in a modal
+function showDetailedTravelTips(category) {
+    const data = travelTipsData[category];
+    if (data) { // Check if data exists for the category
+        const modalTitle = document.getElementById('modalTitle');
+        modalTitle.textContent = data.title;
+        
+        const modalContent = data.content.map(tip => `<li>${tip}</li>`).join('');
+        document.getElementById('modalContent').innerHTML = modalContent;
+
+        document.getElementById('travelModal').classList.remove('hidden');
+    } else {
+        console.error('No data found for category:', category); // Log error if category is invalid
+    }
+}
+</script>
